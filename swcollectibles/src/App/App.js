@@ -1,23 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import CssBaseline from '@material-ui/core/CssBaseline';
+//import MiniDrawer from './MiniDrawer/miniDrawer'
+import AppBar from '../components/AppBar/AppBar.js'
+import SignInSide from '../components/SignInSide/SignInSide.js'
+import { BrowserRouter as Router } from 'react-router-dom'
 
-function App() {
+
+const App = () => {
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div >
+      <Router> 
+        <CssBaseline />
+        <AppBar />
+        <SignInSide />
+        {/* <MiniDrawer /> */}
+      </Router>
     </div>
   );
 }
