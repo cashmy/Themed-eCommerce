@@ -12,6 +12,7 @@ import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
+import Image from '../../assets/images/wallpapersden.com_star-wars-skywalker-saga_3840x2400.jpg'
 
 function Copyright() {
   return (
@@ -31,8 +32,7 @@ const useStyles = makeStyles((theme) => ({
     height: '100vh',
   },
   image: {
-    backgroundImage: 'public\wallpapersden.com_star-wars-skywalker-saga_3840x2400.jpg',
-    backgroundRepeat: 'no-repeat',
+    backgroundImage: `url(${Image})`,
     backgroundColor:
       theme.palette.type === 'light' ? theme.palette.grey[50] : theme.palette.grey[900],
     backgroundSize: 'cover',
