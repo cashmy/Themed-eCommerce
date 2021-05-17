@@ -10,8 +10,8 @@ using eCommerceStarterCode.Data;
 namespace eCommerceStarterCode.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210515214356_initialmigration")]
-    partial class initialmigration
+    [Migration("20210517215316_test")]
+    partial class test
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -50,15 +50,15 @@ namespace eCommerceStarterCode.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "504f2c83-539b-4ff7-b4ab-0374ff3c2dfb",
-                            ConcurrencyStamp = "71bf6ed1-376d-45bd-bd3a-94df1d052053",
+                            Id = "ea604aa2-4e76-4346-a669-13f722435bc3",
+                            ConcurrencyStamp = "fc8f501e-1cf2-4e04-b424-cb133ffccf4a",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
-                            Id = "a226e5d8-d387-4f1e-bbb8-86a35b186de9",
-                            ConcurrencyStamp = "1bc66235-3300-427c-a147-a71777132d0c",
+                            Id = "8795f4f3-7f11-4536-afe9-de78ca399a86",
+                            ConcurrencyStamp = "4af62a9c-a4ff-4a7a-8bfe-4d8dec19cf5c",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
@@ -168,6 +168,38 @@ namespace eCommerceStarterCode.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("eCommerceStarterCode.Models.AppRole", b =>
+                {
+                    b.Property<int>("RoleId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("RoleName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("RoleId");
+
+                    b.ToTable("AppRoles");
+
+                    b.HasData(
+                        new
+                        {
+                            RoleId = 1,
+                            RoleName = "Customer"
+                        },
+                        new
+                        {
+                            RoleId = 2,
+                            RoleName = "Employee"
+                        },
+                        new
+                        {
+                            RoleId = 3,
+                            RoleName = "Admin"
+                        });
+                });
+
             modelBuilder.Entity("eCommerceStarterCode.Models.User", b =>
                 {
                     b.Property<string>("Id")
@@ -189,6 +221,9 @@ namespace eCommerceStarterCode.Migrations
 
                     b.Property<string>("FirstName")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsSupplier")
+                        .HasColumnType("bit");
 
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
@@ -222,6 +257,9 @@ namespace eCommerceStarterCode.Migrations
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("bit");
 
+                    b.Property<string>("UserCurrency")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("UserName")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
@@ -237,6 +275,21 @@ namespace eCommerceStarterCode.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
+                });
+
+            modelBuilder.Entity("eCommerceStarterCode.Models.UserRole", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("RoleId")
+                        .HasColumnType("int");
+
+                    b.HasKey("UserId");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("UserRoles");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -288,6 +341,25 @@ namespace eCommerceStarterCode.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("eCommerceStarterCode.Models.UserRole", b =>
+                {
+                    b.HasOne("eCommerceStarterCode.Models.AppRole", "AppRole")
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("eCommerceStarterCode.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AppRole");
+
+                    b.Navigation("User");
                 });
 #pragma warning restore 612, 618
         }

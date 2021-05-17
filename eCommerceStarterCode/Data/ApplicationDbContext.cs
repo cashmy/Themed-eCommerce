@@ -18,6 +18,7 @@ namespace eCommerceStarterCode.Data
         }
         public virtual DbSet<AppRole> AppRoles { get; set; }
         public virtual DbSet<UserRole> UserRoles { get; set; }
+        public object CategoryClass { get; internal set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
