@@ -20,7 +20,7 @@ namespace eCommerceStarterCode.Controllers
             _context = context;
         }
         // <baseurl>/api/products
-        [HttpGet("get-all-reviews"), Authorize]
+        [HttpGet("get-all-reviews")]
         public IActionResult GetProductReviews()
         {
             var productReviews = _context.ProductReviews;
@@ -28,10 +28,11 @@ namespace eCommerceStarterCode.Controllers
         }
 
         // POST /api/product
-        [HttpPost, Authorize]
-        public IActionResult Post([FromBody] Product value)
+        [HttpPost("create"), Authorize]
+        public IActionResult CreateProductReview([FromBody]ProductReview value)
         {
-            _context.Products.Add(value);
+            /// Currently hard coded... Need to pass parameters
+            _context.ProductReviews.Add(value);
             _context.SaveChanges();
             return StatusCode(201, value);
         }
