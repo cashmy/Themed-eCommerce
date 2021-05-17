@@ -22,8 +22,9 @@ namespace eCommerceStarterCode.Controllers
         [HttpGet("user"), Authorize]
         public IActionResult GetCurrentUser()
         {
-            var username = User.FindFirstValue(ClaimTypes.Name);
-            var user = _context.Users.Where(u => u.UserName == username).SingleOrDefault();
+           
+            var userId = User.FindFirstValue("id");
+            var user = _context.Users.Find(userId);
             if (user == null)
             {
                 return Ok("user does not exist");
