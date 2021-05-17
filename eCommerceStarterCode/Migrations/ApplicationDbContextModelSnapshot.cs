@@ -48,15 +48,15 @@ namespace eCommerceStarterCode.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "f0b9fe13-9c13-4bb1-a4be-75a97731ab97",
-                            ConcurrencyStamp = "62d1be41-a43d-4560-ad70-ee64fd022b3e",
+                            Id = "341de63c-8d4e-467f-aafc-761af1ea6445",
+                            ConcurrencyStamp = "78cf555c-d056-41fd-92a6-f5b7abeb5783",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
-                            Id = "69eb8307-6682-49e8-8c9f-168e3bec3c62",
-                            ConcurrencyStamp = "1a534de4-d257-405e-ad97-18b3c68a44ab",
+                            Id = "807533f9-0d34-4315-918b-3bb959606471",
+                            ConcurrencyStamp = "5ea002f2-d7d5-45ca-a47b-5829959d8c49",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
@@ -209,8 +209,8 @@ namespace eCommerceStarterCode.Migrations
                     b.Property<string>("CategoryDescription")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("CategoryId")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
 
                     b.Property<string>("ConcurrencyStamp")
                         .HasColumnType("nvarchar(max)");

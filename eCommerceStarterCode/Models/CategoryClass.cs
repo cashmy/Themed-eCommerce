@@ -10,7 +10,7 @@ namespace eCommerceStarterCode.Models
     public class CategoryTable : IdentityUser
     {
 
-        public string CategoryId { get; set; }
+        public int CategoryId { get; set; }
         public string CategoryDescription { get; set; }
     }
 }
