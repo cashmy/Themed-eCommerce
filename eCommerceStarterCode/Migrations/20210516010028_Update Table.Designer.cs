@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using eCommerceStarterCode.Data;
 
 namespace eCommerceStarterCode.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210516010028_Update Table")]
+    partial class UpdateTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -48,15 +50,15 @@ namespace eCommerceStarterCode.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "ea604aa2-4e76-4346-a669-13f722435bc3",
-                            ConcurrencyStamp = "fc8f501e-1cf2-4e04-b424-cb133ffccf4a",
+                            Id = "5886e184-1a5a-4df6-9c40-76cdd2674449",
+                            ConcurrencyStamp = "445ad94a-394f-4453-97f0-1610d581718c",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
-                            Id = "8795f4f3-7f11-4536-afe9-de78ca399a86",
-                            ConcurrencyStamp = "4af62a9c-a4ff-4a7a-8bfe-4d8dec19cf5c",
+                            Id = "dc3a15e9-b7ce-451d-ab0d-19d6037076a3",
+                            ConcurrencyStamp = "39535557-d343-4c22-9aea-b53851cdc623",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });

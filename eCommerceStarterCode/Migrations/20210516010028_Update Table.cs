@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace eCommerceStarterCode.Migrations
 {
-    public partial class initialmigration : Migration
+    public partial class UpdateTable : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -208,8 +208,8 @@ namespace eCommerceStarterCode.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "a57b95cc-624d-4c93-8397-3ba2866a12da", "8946fe3b-c521-499b-b6bc-001904da6e56", "User", "USER" },
-                    { "8b034e35-c520-41fa-ae5d-511e23365823", "73eb3f1e-30ce-40f8-825e-9b1182ed5b22", "Admin", "ADMIN" }
+                    { "5886e184-1a5a-4df6-9c40-76cdd2674449", "445ad94a-394f-4453-97f0-1610d581718c", "User", "USER" },
+                    { "dc3a15e9-b7ce-451d-ab0d-19d6037076a3", "39535557-d343-4c22-9aea-b53851cdc623", "Admin", "ADMIN" }
                 });
 
             migrationBuilder.CreateIndex(

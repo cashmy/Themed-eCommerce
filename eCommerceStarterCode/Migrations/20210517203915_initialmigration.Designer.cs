@@ -10,7 +10,7 @@ using eCommerceStarterCode.Data;
 namespace eCommerceStarterCode.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210517205444_initialmigration")]
+    [Migration("20210517203915_initialmigration")]
     partial class initialmigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -50,15 +50,15 @@ namespace eCommerceStarterCode.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "a57b95cc-624d-4c93-8397-3ba2866a12da",
-                            ConcurrencyStamp = "8946fe3b-c521-499b-b6bc-001904da6e56",
+                            Id = "81171a13-ced3-49bc-a7a0-b6ba72c2e357",
+                            ConcurrencyStamp = "369d0e07-22ba-4e0b-8d04-687e843a0a00",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
-                            Id = "8b034e35-c520-41fa-ae5d-511e23365823",
-                            ConcurrencyStamp = "73eb3f1e-30ce-40f8-825e-9b1182ed5b22",
+                            Id = "1d8c5baa-0ef5-4bc4-bb7d-46aeccfae328",
+                            ConcurrencyStamp = "9056f732-c716-4d3c-997e-05a3c3fab0f2",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
@@ -197,6 +197,43 @@ namespace eCommerceStarterCode.Migrations
                         {
                             RoleId = 3,
                             RoleName = "Admin"
+                        });
+                });
+
+            modelBuilder.Entity("eCommerceStarterCode.Models.Product", b =>
+                {
+                    b.Property<int>("ProductId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<decimal>("ProductAverageRating")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("ProductDescription")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte[]>("ProductImage")
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<decimal>("ProductPrice")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("QuantityOnHand")
+                        .HasColumnType("int");
+
+                    b.HasKey("ProductId");
+
+                    b.ToTable("Products");
+
+                    b.HasData(
+                        new
+                        {
+                            ProductId = 1,
+                            ProductAverageRating = 4m,
+                            ProductDescription = "Han Solo Action Figure",
+                            ProductPrice = 15m,
+                            QuantityOnHand = 5
                         });
                 });
 
