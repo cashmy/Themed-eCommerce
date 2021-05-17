@@ -48,15 +48,15 @@ namespace eCommerceStarterCode.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "3857d5e7-d75e-4cd6-9319-057c278f1db3",
-                            ConcurrencyStamp = "fde3caad-7c37-4f5e-8c6e-0f88c6c5ad08",
+                            Id = "81171a13-ced3-49bc-a7a0-b6ba72c2e357",
+                            ConcurrencyStamp = "369d0e07-22ba-4e0b-8d04-687e843a0a00",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
-                            Id = "b57576fd-bfae-439a-bb76-f278274526a1",
-                            ConcurrencyStamp = "38612b01-c7bc-4ba7-a76e-7348e45a6c9e",
+                            Id = "1d8c5baa-0ef5-4bc4-bb7d-46aeccfae328",
+                            ConcurrencyStamp = "9056f732-c716-4d3c-997e-05a3c3fab0f2",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
@@ -166,35 +166,66 @@ namespace eCommerceStarterCode.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("eCommerceStarterCode.Models.AppRole", b =>
+            modelBuilder.Entity("eCommerceStarterCode.Models.Product", b =>
                 {
+                    b.Property<int>("ProductId")
                     b.Property<int>("RoleId")
+=========
+            modelBuilder.Entity("eCommerceStarterCode.Models.Product", b =>
+                {
+                    b.Property<int>("ProductId")
+>>>>>>>>> Temporary merge branch 2
+                    b.Property<int>("RoleId")
+=========
+            modelBuilder.Entity("eCommerceStarterCode.Models.Product", b =>
+                {
+                    b.Property<int>("ProductId")
+>>>>>>>>> Temporary merge branch 2
+                    b.Property<int>("RoleId")
+=========
+            modelBuilder.Entity("eCommerceStarterCode.Models.Product", b =>
+                {
+                    b.Property<int>("ProductId")
+>>>>>>>>> Temporary merge branch 2
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+<<<<<<<<< Temporary merge branch 1
                     b.Property<string>("RoleName")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("RoleId");
 
                     b.ToTable("AppRoles");
+=========
+                    b.Property<decimal>("ProductAverageRating")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("ProductDescription")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte[]>("ProductImage")
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<decimal>("ProductPrice")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("QuantityOnHand")
+                        .HasColumnType("int");
+
+                    b.HasKey("ProductId");
+
+                    b.ToTable("Products");
 
                     b.HasData(
                         new
                         {
-                            RoleId = 1,
-                            RoleName = "Customer"
-                        },
-                        new
-                        {
-                            RoleId = 2,
-                            RoleName = "Employee"
-                        },
-                        new
-                        {
-                            RoleId = 3,
-                            RoleName = "Admin"
+                            ProductId = 1,
+                            ProductAverageRating = 4m,
+                            ProductDescription = "Han Solo Action Figure",
+                            ProductPrice = 15m,
+                            QuantityOnHand = 5
                         });
                 });
 

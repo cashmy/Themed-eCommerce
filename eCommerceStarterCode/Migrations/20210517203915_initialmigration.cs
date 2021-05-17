@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace eCommerceStarterCode.Migrations
 {
-    public partial class UpdateTable : Migration
+    public partial class initialmigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -61,6 +61,23 @@ namespace eCommerceStarterCode.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Products",
+                columns: table => new
+                {
+                    ProductId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ProductDescription = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ProductPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    QuantityOnHand = table.Column<int>(type: "int", nullable: false),
+                    ProductAverageRating = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    ProductImage = table.Column<byte[]>(type: "varbinary(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Products", x => x.ProductId);
                 });
 
             migrationBuilder.CreateTable(
@@ -208,9 +225,14 @@ namespace eCommerceStarterCode.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "5886e184-1a5a-4df6-9c40-76cdd2674449", "445ad94a-394f-4453-97f0-1610d581718c", "User", "USER" },
-                    { "dc3a15e9-b7ce-451d-ab0d-19d6037076a3", "39535557-d343-4c22-9aea-b53851cdc623", "Admin", "ADMIN" }
+                    { "81171a13-ced3-49bc-a7a0-b6ba72c2e357", "369d0e07-22ba-4e0b-8d04-687e843a0a00", "User", "USER" },
+                    { "1d8c5baa-0ef5-4bc4-bb7d-46aeccfae328", "9056f732-c716-4d3c-997e-05a3c3fab0f2", "Admin", "ADMIN" }
                 });
+
+            migrationBuilder.InsertData(
+                table: "Products",
+                columns: new[] { "ProductId", "ProductAverageRating", "ProductDescription", "ProductImage", "ProductPrice", "QuantityOnHand" },
+                values: new object[] { 1, 4m, "Han Solo Action Figure", null, 15m, 5 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -273,6 +295,9 @@ namespace eCommerceStarterCode.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "Products");
 
             migrationBuilder.DropTable(
                 name: "UserRoles");

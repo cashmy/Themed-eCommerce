@@ -10,8 +10,8 @@ using eCommerceStarterCode.Data;
 namespace eCommerceStarterCode.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210516010028_Update Table")]
-    partial class UpdateTable
+    [Migration("20210517203915_initialmigration")]
+    partial class initialmigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -50,15 +50,15 @@ namespace eCommerceStarterCode.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "5886e184-1a5a-4df6-9c40-76cdd2674449",
-                            ConcurrencyStamp = "445ad94a-394f-4453-97f0-1610d581718c",
+                            Id = "81171a13-ced3-49bc-a7a0-b6ba72c2e357",
+                            ConcurrencyStamp = "369d0e07-22ba-4e0b-8d04-687e843a0a00",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
-                            Id = "dc3a15e9-b7ce-451d-ab0d-19d6037076a3",
-                            ConcurrencyStamp = "39535557-d343-4c22-9aea-b53851cdc623",
+                            Id = "1d8c5baa-0ef5-4bc4-bb7d-46aeccfae328",
+                            ConcurrencyStamp = "9056f732-c716-4d3c-997e-05a3c3fab0f2",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
@@ -197,6 +197,43 @@ namespace eCommerceStarterCode.Migrations
                         {
                             RoleId = 3,
                             RoleName = "Admin"
+                        });
+                });
+
+            modelBuilder.Entity("eCommerceStarterCode.Models.Product", b =>
+                {
+                    b.Property<int>("ProductId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<decimal>("ProductAverageRating")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("ProductDescription")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte[]>("ProductImage")
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<decimal>("ProductPrice")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("QuantityOnHand")
+                        .HasColumnType("int");
+
+                    b.HasKey("ProductId");
+
+                    b.ToTable("Products");
+
+                    b.HasData(
+                        new
+                        {
+                            ProductId = 1,
+                            ProductAverageRating = 4m,
+                            ProductDescription = "Han Solo Action Figure",
+                            ProductPrice = 15m,
+                            QuantityOnHand = 5
                         });
                 });
 
