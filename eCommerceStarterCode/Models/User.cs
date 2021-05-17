@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations;
 
 namespace eCommerceStarterCode.Models
 {
@@ -6,5 +7,7 @@ namespace eCommerceStarterCode.Models
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public string UserCurrency { get; set; }
+        public bool IsSupplier { get; set; }
     }
 }

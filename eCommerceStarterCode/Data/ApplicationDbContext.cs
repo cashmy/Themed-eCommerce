@@ -7,10 +7,24 @@ namespace eCommerceStarterCode.Data
 {
     public class ApplicationDbContext : IdentityDbContext<User>
     {
+        public ApplicationDbContext()
+        {
+
+        }
         public ApplicationDbContext(DbContextOptions options)
             :base(options)
         {
 
+        }
+        public virtual DbSet<AppRole> AppRoles { get; set; }
+        public virtual DbSet<UserRole> UserRoles { get; set; }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+                optionsBuilder.UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=eCommerce;Trusted_Connection=True;");
+            }
         }
 
         public DbSet<Product> Products { get; set; }
@@ -35,6 +49,15 @@ namespace eCommerceStarterCode.Data
             );
 
             modelBuilder.ApplyConfiguration(new RolesConfiguration());
+            modelBuilder.Entity<User>();
+            modelBuilder.Entity<UserRole>();
+            modelBuilder.Entity<AppRole>()
+                .HasData(
+                    new AppRole { RoleId = 1, RoleName= "Customer" },
+                    new AppRole { RoleId = 2, RoleName= "Employee" },
+                    new AppRole { RoleId = 3, RoleName= "Admin" }
+
+                ); 
         }
 
     }
