@@ -15,6 +15,8 @@ namespace eCommerceStarterCode.Data
         public  DbSet<AppRole> AppRoles { get; set; }
         public  DbSet<UserRole> UserRoles { get; set; }
 
+
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
@@ -23,7 +25,7 @@ namespace eCommerceStarterCode.Data
             }
         }
 
-        public DbSet<Product> Products { get; set; }
+
 
 //        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 //        {
