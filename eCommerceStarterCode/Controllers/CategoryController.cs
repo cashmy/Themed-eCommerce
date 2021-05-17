@@ -23,7 +23,7 @@ namespace eCommerceStarterCode.Controllers
         [HttpGet, Authorize]
         public IActionResult GetCategories()
         {
-            var catergories = _context.CategoryClass;
+            var catergories = _context.CategoryTables;
             
             if (catergories == null)
             {
@@ -35,7 +35,7 @@ namespace eCommerceStarterCode.Controllers
         [HttpPost, Authorize]
         public IActionResult Post([FromBody] CategoryTable value)
         {
-            _context.CategoryClass.Add(value);
+            _context.CategoryTables.Add(value);
             _context.SaveChanges();
             return StatusCode(201, value);
         }
