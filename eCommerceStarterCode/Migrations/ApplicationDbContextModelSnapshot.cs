@@ -166,45 +166,39 @@ namespace eCommerceStarterCode.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("eCommerceStarterCode.Models.AppRole", b =>
+            modelBuilder.Entity("eCommerceStarterCode.Models.Product", b =>
                 {
+                    b.Property<int>("ProductId")
                     b.Property<int>("RoleId")
+=========
+            modelBuilder.Entity("eCommerceStarterCode.Models.Product", b =>
+                {
+                    b.Property<int>("ProductId")
+>>>>>>>>> Temporary merge branch 2
+                    b.Property<int>("RoleId")
+=========
+            modelBuilder.Entity("eCommerceStarterCode.Models.Product", b =>
+                {
+                    b.Property<int>("ProductId")
+>>>>>>>>> Temporary merge branch 2
+                    b.Property<int>("RoleId")
+=========
+            modelBuilder.Entity("eCommerceStarterCode.Models.Product", b =>
+                {
+                    b.Property<int>("ProductId")
+>>>>>>>>> Temporary merge branch 2
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+<<<<<<<<< Temporary merge branch 1
                     b.Property<string>("RoleName")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("RoleId");
 
                     b.ToTable("AppRoles");
-
-                    b.HasData(
-                        new
-                        {
-                            RoleId = 1,
-                            RoleName = "Customer"
-                        },
-                        new
-                        {
-                            RoleId = 2,
-                            RoleName = "Employee"
-                        },
-                        new
-                        {
-                            RoleId = 3,
-                            RoleName = "Admin"
-                        });
-                });
-
-            modelBuilder.Entity("eCommerceStarterCode.Models.Product", b =>
-                {
-                    b.Property<int>("ProductId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
+=========
                     b.Property<decimal>("ProductAverageRating")
                         .HasColumnType("decimal(18,2)");
 
