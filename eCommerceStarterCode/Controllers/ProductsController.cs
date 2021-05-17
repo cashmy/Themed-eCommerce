@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using eCommerceStarterCode.Models;
 
 namespace eCommerceStarterCode.Controllers
 {
@@ -23,13 +24,13 @@ namespace eCommerceStarterCode.Controllers
         [HttpGet, Authorize]
         public IActionResult Get()
         {
-            var products = _context.Products;
-            return Ok(products);
+            var product = _context.Products;
+            return Ok(product);
         }
 
         // POST /api/product
         [HttpPost, Authorize]
-        public IActionResult Post([FromBody]Products value)
+        public IActionResult Post([FromBody]Product value)
         {
             _context.Products.Add(value);
             _context.SaveChanges();
