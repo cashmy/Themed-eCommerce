@@ -14,6 +14,7 @@ namespace eCommerceStarterCode.Controllers
     public class AuthenticationController : ControllerBase
     {
         private readonly UserManager<User> _userManager;
+        private UserRoleClass userRole = new UserRoleClass();
         private readonly IMapper _mapper;
         private readonly IAuthenticationManager _authManager;
         public AuthenticationController(IMapper mapper, UserManager<User> userManager, IAuthenticationManager authManager)
@@ -40,6 +41,7 @@ namespace eCommerceStarterCode.Controllers
                 return BadRequest(ModelState);
             }
             await _userManager.AddToRoleAsync(user, "USER");
+            userRole.AddRoleId(user.Id);
             return StatusCode(201, user);
         }
 

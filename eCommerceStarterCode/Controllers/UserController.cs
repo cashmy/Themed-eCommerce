@@ -10,21 +10,22 @@ using System.Threading.Tasks;
 
 namespace eCommerceStarterCode.Controllers
 {
-    [Route("api/examples")]
+    [Route("api/user")]
     [ApiController]
-    public class ExamplesController : ControllerBase
+    public class UserController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
-        public ExamplesController(ApplicationDbContext context)
+        public UserController(ApplicationDbContext context)
         {
             _context = context;
         }
         // <baseurl>/api/examples/user
-        [HttpGet("user"), Authorize]
+        [HttpGet("get-user"), Authorize]
         public IActionResult GetCurrentUser()
         {
-            var user = _context.Users.Where(u => u.UserName == User.FindFirstValue(ClaimTypes.Name)).SingleOrDefault();
-            if(user == null)
+            var userId = User.FindFirstValue("id");
+            var user = _context.Users.Find(userId);
+            if (user == null)
             {
                 return NotFound();
             }
