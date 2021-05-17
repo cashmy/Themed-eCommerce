@@ -24,7 +24,7 @@ namespace eCommerceStarterCode.Controllers
         public IActionResult GetCategories()
         {
             var catergories = _context.CategoryTables;
-            
+
             if (catergories == null)
             {
                 return NotFound();
@@ -39,6 +39,26 @@ namespace eCommerceStarterCode.Controllers
             _context.SaveChanges();
             return StatusCode(201, value);
         }
+
+        [HttpDelete, Authorize]
+        public IActionResult Delete(int id)
+        {
+            try
+            {
+                var selectedObject = _context.CategoryTables.Where(u => u.CategoryId == id).Select(u => u.CategoryId).SingleOrDefault();
+                _context.Remove(selectedObject);
+                _context.SaveChanges();
+                return Ok("code worked");
+            }
+            catch
+            {
+                return NotFound("no object");
+            }
+        } 
+        
+           
+
+            
     }
 
 }
