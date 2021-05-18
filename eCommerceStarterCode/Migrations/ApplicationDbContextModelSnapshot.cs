@@ -189,7 +189,7 @@ namespace eCommerceStarterCode.Migrations
                         new
                         {
                             RoleId = 2,
-                            RoleName = "Employee"
+                            RoleName = "Supplier"
                         },
                         new
                         {

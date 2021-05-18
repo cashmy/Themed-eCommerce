@@ -2,6 +2,7 @@
 using eCommerceStarterCode.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 
 namespace eCommerceStarterCode.Data
 {
@@ -19,6 +20,9 @@ namespace eCommerceStarterCode.Data
         public DbSet<Product> Products { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<ProductReview> ProductReviews { get;  set; }
+        public DbSet<ShoppingCart> ShoppingCarts { get; set; }
+        public IEnumerable<object> ShoppingCart { get; internal set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
@@ -48,11 +52,12 @@ namespace eCommerceStarterCode.Data
             modelBuilder.ApplyConfiguration(new RolesConfiguration());
             modelBuilder.Entity<SupplierProduct>().HasKey(sp => new { sp.UserId, sp.ProductId });
             modelBuilder.Entity<User>();
-            modelBuilder.Entity<UserRole>();
+            modelBuilder.Entity<ShoppingCart>().HasKey(u => new { u.UserId, u.ProductId });
+            modelBuilder.Entity<UserRole>().HasKey(u => new { u.UserId, u.RoleId });
             modelBuilder.Entity<AppRole>()
                 .HasData(
                     new AppRole { RoleId = 1, RoleName= "Customer" },
-                    new AppRole { RoleId = 2, RoleName= "Employee" },
+                    new AppRole { RoleId = 2, RoleName= "Supplier" },
                     new AppRole { RoleId = 3, RoleName= "Admin" }
 
                 ); 
