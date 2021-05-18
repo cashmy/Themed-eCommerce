@@ -48,15 +48,15 @@ namespace eCommerceStarterCode.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "9c0f857a-b1ad-433a-9365-33c9431636fd",
-                            ConcurrencyStamp = "c46fc3ee-e7e6-4a8c-8e5e-0c06e02d0955",
+                            Id = "43044b75-e719-489e-8dd4-84529802ceda",
+                            ConcurrencyStamp = "fbab2119-0805-4fed-ace8-1f1fd145625d",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
-                            Id = "666b6fcc-2b6d-4bbe-87de-ffe687856999",
-                            ConcurrencyStamp = "8c6fad00-0095-4dfa-bfce-74ae13f362c9",
+                            Id = "dc41daeb-7b45-4eca-9d22-1d9cbe278df8",
+                            ConcurrencyStamp = "738a1024-4f63-41e3-b0a8-4f569aeaaf20",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
@@ -189,7 +189,7 @@ namespace eCommerceStarterCode.Migrations
                         new
                         {
                             RoleId = 2,
-                            RoleName = "Employee"
+                            RoleName = "Supplier"
                         },
                         new
                         {
@@ -269,6 +269,24 @@ namespace eCommerceStarterCode.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("ProductReviews");
+                });
+
+            modelBuilder.Entity("eCommerceStarterCode.Models.ShoppingCart", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.HasKey("UserId", "ProductId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("ShoppingCarts");
                 });
 
             modelBuilder.Entity("eCommerceStarterCode.Models.User", b =>
@@ -425,6 +443,25 @@ namespace eCommerceStarterCode.Migrations
                     b.HasOne("eCommerceStarterCode.Models.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId");
+
+                    b.Navigation("Product");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("eCommerceStarterCode.Models.ShoppingCart", b =>
+                {
+                    b.HasOne("eCommerceStarterCode.Models.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("eCommerceStarterCode.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Product");
 

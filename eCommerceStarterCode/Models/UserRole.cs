@@ -16,6 +16,7 @@ namespace eCommerceStarterCode.Models
         public string UserId { get; set; }
         public User User { get; set; }
 
+        [Key]
         [ForeignKey("AppRole")]
         public int RoleId { get; set; }
         public AppRole AppRole { get; set; }

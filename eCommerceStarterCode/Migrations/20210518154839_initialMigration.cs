@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace eCommerceStarterCode.Migrations
 {
-    public partial class initialmigration : Migration
+    public partial class initialMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -249,13 +249,38 @@ namespace eCommerceStarterCode.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "ShoppingCarts",
+                columns: table => new
+                {
+                    ProductId = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Quantity = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ShoppingCarts", x => new { x.UserId, x.ProductId });
+                    table.ForeignKey(
+                        name: "FK_ShoppingCarts_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ShoppingCarts_Products_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Products",
+                        principalColumn: "ProductId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.InsertData(
                 table: "AppRoles",
                 columns: new[] { "RoleId", "RoleName" },
                 values: new object[,]
                 {
                     { 1, "Customer" },
-                    { 2, "Employee" },
+                    { 2, "Supplier" },
                     { 3, "Admin" }
                 });
 
@@ -264,8 +289,8 @@ namespace eCommerceStarterCode.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "9c0f857a-b1ad-433a-9365-33c9431636fd", "c46fc3ee-e7e6-4a8c-8e5e-0c06e02d0955", "User", "USER" },
-                    { "666b6fcc-2b6d-4bbe-87de-ffe687856999", "8c6fad00-0095-4dfa-bfce-74ae13f362c9", "Admin", "ADMIN" }
+                    { "43044b75-e719-489e-8dd4-84529802ceda", "fbab2119-0805-4fed-ace8-1f1fd145625d", "User", "USER" },
+                    { "dc41daeb-7b45-4eca-9d22-1d9cbe278df8", "738a1024-4f63-41e3-b0a8-4f569aeaaf20", "Admin", "ADMIN" }
                 });
 
             migrationBuilder.InsertData(
@@ -318,6 +343,11 @@ namespace eCommerceStarterCode.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_ShoppingCarts_ProductId",
+                table: "ShoppingCarts",
+                column: "ProductId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_UserRoles_RoleId",
                 table: "UserRoles",
                 column: "RoleId");
@@ -345,6 +375,9 @@ namespace eCommerceStarterCode.Migrations
 
             migrationBuilder.DropTable(
                 name: "ProductReviews");
+
+            migrationBuilder.DropTable(
+                name: "ShoppingCarts");
 
             migrationBuilder.DropTable(
                 name: "UserRoles");
