@@ -36,7 +36,7 @@ namespace eCommerceStarterCode.Controllers
         public IActionResult GetRoleStatus()
         {
             // Hard coded userId for testing
-            string userId = "829af3f1-2178-4001-9bcc-c1b92a3b23fe";
+            string userId = "75777217-c7ad-40f2-bf1c-92cdd2b0e0a0";
             bool isSupplier = _context.Users.Where(u => u.Id == userId).Select(u => u.IsSupplier).SingleOrDefault();
             var user = _context.Users.Find(userId);
             if (user == null)

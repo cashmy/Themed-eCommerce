@@ -14,9 +14,9 @@ namespace eCommerceStarterCode.Data
         }
         public  DbSet<AppRole> AppRoles { get; set; }
         public  DbSet<UserRole> UserRoles { get; set; }
-
+        public DbSet<Product> Products { get; set; }
         public DbSet<Category> Categories { get; set; }
-
+        public DbSet<ProductReview> ProductReviews { get;  set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
@@ -24,8 +24,6 @@ namespace eCommerceStarterCode.Data
                 optionsBuilder.UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=eCommerce;Trusted_");
             }
         }
-
-        public DbSet<Product> Products { get; set; }
 
 //        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 //        {

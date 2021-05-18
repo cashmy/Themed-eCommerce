@@ -10,8 +10,8 @@ using eCommerceStarterCode.Data;
 namespace eCommerceStarterCode.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210517230014_initial")]
-    partial class initial
+    [Migration("20210518150838_initialmigration")]
+    partial class initialmigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -50,15 +50,15 @@ namespace eCommerceStarterCode.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "341de63c-8d4e-467f-aafc-761af1ea6445",
-                            ConcurrencyStamp = "78cf555c-d056-41fd-92a6-f5b7abeb5783",
+                            Id = "9c0f857a-b1ad-433a-9365-33c9431636fd",
+                            ConcurrencyStamp = "c46fc3ee-e7e6-4a8c-8e5e-0c06e02d0955",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
-                            Id = "807533f9-0d34-4315-918b-3bb959606471",
-                            ConcurrencyStamp = "5ea002f2-d7d5-45ca-a47b-5829959d8c49",
+                            Id = "666b6fcc-2b6d-4bbe-87de-ffe687856999",
+                            ConcurrencyStamp = "8c6fad00-0095-4dfa-bfce-74ae13f362c9",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
@@ -200,62 +200,19 @@ namespace eCommerceStarterCode.Migrations
                         });
                 });
 
-            modelBuilder.Entity("eCommerceStarterCode.Models.CategoryTable", b =>
+            modelBuilder.Entity("eCommerceStarterCode.Models.Category", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("AccessFailedCount")
-                        .HasColumnType("int");
+                    b.Property<int>("CategoryId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("CategoryDescription")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("CategoryId")
-                        .HasColumnType("int");
+                    b.HasKey("CategoryId");
 
-                    b.Property<string>("ConcurrencyStamp")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("LockoutEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("NormalizedEmail")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("NormalizedUserName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PasswordHash")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("SecurityStamp")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("UserName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("CategoryTables");
+                    b.ToTable("Categories");
                 });
 
             modelBuilder.Entity("eCommerceStarterCode.Models.Product", b =>
@@ -293,6 +250,27 @@ namespace eCommerceStarterCode.Migrations
                             ProductPrice = 15m,
                             QuantityOnHand = 5
                         });
+                });
+
+            modelBuilder.Entity("eCommerceStarterCode.Models.ProductReview", b =>
+                {
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ReviewRating")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ReviewText")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("ProductId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("ProductReviews");
                 });
 
             modelBuilder.Entity("eCommerceStarterCode.Models.User", b =>
@@ -436,6 +414,23 @@ namespace eCommerceStarterCode.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("eCommerceStarterCode.Models.ProductReview", b =>
+                {
+                    b.HasOne("eCommerceStarterCode.Models.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("eCommerceStarterCode.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("Product");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("eCommerceStarterCode.Models.UserRole", b =>

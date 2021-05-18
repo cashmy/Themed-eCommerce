@@ -13,7 +13,7 @@ namespace eCommerceStarterCode.Models
         [Key]
         [ForeignKey("Product")]
         public int ProductId { get; set; }
-        //public Product Product { get; set; }
+        public Product Product { get; set; }
 
         [ForeignKey("User")]
         public string UserId { get; set; }
