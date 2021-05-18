@@ -15,7 +15,7 @@ namespace eCommerceStarterCode.Data
         public  DbSet<AppRole> AppRoles { get; set; }
         public  DbSet<UserRole> UserRoles { get; set; }
 
-        public DbSet<CategoryTable> CategoryTables { get; set; }
+        public DbSet<Category> Categories { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
