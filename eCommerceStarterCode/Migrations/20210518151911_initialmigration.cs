@@ -264,8 +264,8 @@ namespace eCommerceStarterCode.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "9c0f857a-b1ad-433a-9365-33c9431636fd", "c46fc3ee-e7e6-4a8c-8e5e-0c06e02d0955", "User", "USER" },
-                    { "666b6fcc-2b6d-4bbe-87de-ffe687856999", "8c6fad00-0095-4dfa-bfce-74ae13f362c9", "Admin", "ADMIN" }
+                    { "0c399f06-e334-4872-a311-349207e027fb", "9997108e-b15d-4c71-bdc1-34ac9b6b7667", "User", "USER" },
+                    { "56714774-f258-4b36-a0c4-b4abddde04b7", "5725e94e-9bcb-44ac-b248-9545194ca349", "Admin", "ADMIN" }
                 });
 
             migrationBuilder.InsertData(
