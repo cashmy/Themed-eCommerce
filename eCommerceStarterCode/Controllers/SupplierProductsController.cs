@@ -38,14 +38,14 @@ namespace eCommerceStarterCode.Controllers
             _context.SaveChanges();
             return StatusCode(201, value);
         }
- //TODO: need to pass in two key fields
-        [HttpDelete("{id}"), Authorize]
+        [HttpDelete("{userid}/{productid}"), Authorize]
 
-        public IActionResult DeleteSupplierProduct(int id)
+        public IActionResult DeleteSupplierProduct(string userid, int productid)
         {
             try
             {
-                var selectedObject = _context.SupplierProducts.Where(p => p.ProductId == id).SingleOrDefault();
+                var compoundKey = new { userid, productid };
+                var selectedObject = _context.SupplierProducts.Where(p => ( p.UserId == userid && p.ProductId == productid )).SingleOrDefault();
                 _context.Remove(selectedObject);
                 _context.SaveChanges();
                 return Ok("product removed");

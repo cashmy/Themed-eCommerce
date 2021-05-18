@@ -45,7 +45,7 @@ namespace eCommerceStarterCode.Controllers
         {
             try
             {
-                var selectedObject = _context.Categories.Where(u => u.CategoryId == id).Select(u => u.CategoryId).SingleOrDefault();
+                var selectedObject = _context.Categories.Where(u => u.CategoryId == id).SingleOrDefault();
                 _context.Remove(selectedObject);
                 _context.SaveChanges();
                 return Ok("code worked");
