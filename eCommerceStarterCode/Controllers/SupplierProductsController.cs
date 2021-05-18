@@ -35,7 +35,6 @@ namespace eCommerceStarterCode.Controllers
         {
             _context.SupplierProducts.Add(value);
             _context.SaveChanges();
-            _context.SaveChanges();
             return StatusCode(201, value);
         }
         [HttpDelete("{userid}/{productid}"), Authorize]
