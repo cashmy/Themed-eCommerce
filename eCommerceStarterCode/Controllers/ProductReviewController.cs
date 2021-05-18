@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace eCommerceStarterCode.Controllers
 {
-    [Route("api/product-review")]
+    [Route("api/ProductReview")]
     [ApiController]
     public class ProductReviewController : ControllerBase
     {
@@ -20,14 +20,14 @@ namespace eCommerceStarterCode.Controllers
             _context = context;
         }
         // <baseurl>/api/products
-        [HttpGet("get-all-reviews")]
+        [HttpGet("getAll")]
         public IActionResult GetProductReviews()
         {
             var productReviews = _context.ProductReviews;
             return Ok(productReviews);
         }
 
-        [HttpGet("{id}-reviews"), Authorize]
+        [HttpGet("{id}/getUserReviews"), Authorize]
         public IActionResult UserReviews(string id)
         {
             try
@@ -42,7 +42,7 @@ namespace eCommerceStarterCode.Controllers
 
         }
 
-        [HttpPut("{productId}_{id}-review"), Authorize]
+        [HttpPut("{id}/{productId}/review"), Authorize]
         public IActionResult EditReview(string id, int productId, [FromBody] ProductReview value)
         {
             try
@@ -71,7 +71,7 @@ namespace eCommerceStarterCode.Controllers
             return StatusCode(201, value);
         }
 
-        [HttpDelete("{productId}_{id}-deleteReview"), Authorize]
+        [HttpDelete("{productId}/{id}/deleteReview"), Authorize]
         public IActionResult DeleteProductReivew(string id, int productId)
         {
             var review = _context.ProductReviews.Where(u => (u.UserId == id && u.ProductId == productId)).SingleOrDefault();
