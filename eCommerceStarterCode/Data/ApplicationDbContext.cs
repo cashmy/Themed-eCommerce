@@ -9,12 +9,12 @@ namespace eCommerceStarterCode.Data
     public class ApplicationDbContext : IdentityDbContext<User>
     {
         public ApplicationDbContext(DbContextOptions options)
-            :base(options)
+            : base(options)
         {
 
         }
 
-        public DbSet<SupplierProduct> SupplierProducts { get; set; }
+        public DbSet<SupplierProduct> SupplierProducts { get; set; } 
         public  DbSet<AppRole> AppRoles { get; set; }
         public  DbSet<UserRole> UserRoles { get; set; }
         public DbSet<Product> Products { get; set; }
@@ -44,13 +44,13 @@ namespace eCommerceStarterCode.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-
             modelBuilder.Entity<Product>()
             .HasData(
             new Product { ProductId = 1, ProductDescription = "Han Solo Action Figure", ProductPrice = 15, QuantityOnHand = 5, ProductAverageRating = 4 }  
             );
 
             modelBuilder.ApplyConfiguration(new RolesConfiguration());
+            modelBuilder.Entity<SupplierProduct>().HasKey(sp => new { sp.UserId, sp.ProductId });
             modelBuilder.Entity<User>();
             modelBuilder.Entity<ShoppingCart>().HasKey(u => new { u.UserId, u.ProductId });
             modelBuilder.Entity<UserRole>().HasKey(u => new { u.UserId, u.RoleId });
