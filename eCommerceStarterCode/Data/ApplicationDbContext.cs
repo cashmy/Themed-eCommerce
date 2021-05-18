@@ -44,9 +44,12 @@ namespace eCommerceStarterCode.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Category>()
+                .HasData(
+                    new Category { CategoryId = 1, CategoryDescription = "Action Figure" });
             modelBuilder.Entity<Product>()
             .HasData(
-            new Product { ProductId = 1, ProductDescription = "Han Solo Action Figure", ProductPrice = 15, QuantityOnHand = 5, ProductAverageRating = 4 }  
+            new Product { ProductId = 1, ProductDescription = "Han Solo Action Figure", ProductPrice = 15, QuantityOnHand = 5, ProductAverageRating = 4, CategoryId=1 }  
             );
 
             modelBuilder.ApplyConfiguration(new RolesConfiguration());
@@ -60,7 +63,7 @@ namespace eCommerceStarterCode.Data
                     new AppRole { RoleId = 2, RoleName= "Supplier" },
                     new AppRole { RoleId = 3, RoleName= "Admin" }
 
-                ); 
+                );
         }
 
     }
