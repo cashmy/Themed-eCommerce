@@ -22,14 +22,14 @@ namespace eCommerceStarterCode.Controllers
         {
             _context = context;
         }
-        [HttpGet("{id}_cart"), Authorize]
+        [HttpGet("{id}/cart"), Authorize]
         public IActionResult GetCurrentUserCart(string id)
         {
             var userCart = _context.ShoppingCarts.Where(u => u.UserId == id).Select(u => new { u.ProductId, u.Quantity });
             return Ok(userCart);
         }
 
-        [HttpPost("{id}_postCart"), Authorize]
+        [HttpPost("{id}/postCart"), Authorize]
 
         public IActionResult Post([FromBody] ShoppingCart value)
         {
@@ -38,7 +38,7 @@ namespace eCommerceStarterCode.Controllers
             return StatusCode(201, value);
         }
 
-        [HttpDelete("{id}_{productId}_delete"), Authorize ]
+        [HttpDelete("{id}/{productId}/delete"), Authorize ]
         public IActionResult Delete(string id, int productId)
         {
 
@@ -48,7 +48,7 @@ namespace eCommerceStarterCode.Controllers
             return Ok();
         }
 
-        [HttpPut("{id}_{productId}_edit"), Authorize]
+        [HttpPut("{id}/{productId}/edit"), Authorize]
 
         public IActionResult Put(string id, int productId, [FromBody]ShoppingCart value)
         {
