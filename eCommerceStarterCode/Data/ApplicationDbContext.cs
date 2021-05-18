@@ -12,6 +12,8 @@ namespace eCommerceStarterCode.Data
         {
 
         }
+
+        public DbSet<SupplierProduct> SupplierProducts { get; set; }
         public  DbSet<AppRole> AppRoles { get; set; }
         public  DbSet<UserRole> UserRoles { get; set; }
         public DbSet<Product> Products { get; set; }

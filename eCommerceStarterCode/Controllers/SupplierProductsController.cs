@@ -6,59 +6,54 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace eCommerceStarterCode.Controllers
 {
-    [Route("api/[controller]/")]
+    [Route("api/[controller]")]
     [ApiController]
-    public class CategoryController : ControllerBase
+    public class SupplierProductsController : ControllerBase
     {
         public ApplicationDbContext _context;
-        public CategoryController(ApplicationDbContext context)
+        public SupplierProductsController(ApplicationDbContext context)
         {
             _context = context;
         }
         [HttpGet, Authorize]
-        public IActionResult GetCategories()
+        public IActionResult GetSupplierProducts()
         {
-            var categories = _context.Categories;
+            var supplierProducts = _context.SupplierProducts;
 
-            if (categories == null)
+            if (supplierProducts == null)
             {
                 return NotFound();
             }
-            return Ok(categories);
+            return Ok(supplierProducts);
         }
-
         [HttpPost, Authorize]
-        public IActionResult Post([FromBody] Category value)
+        public IActionResult PostSupplierProducts([FromBody] SupplierProduct value)
         {
-            _context.Categories.Add(value);
+            _context.SupplierProducts.Add(value);
+            _context.SaveChanges();
             _context.SaveChanges();
             return StatusCode(201, value);
         }
-
+ //TODO: need to pass in two key fields
         [HttpDelete("{id}"), Authorize]
-        public IActionResult Delete (int id)
+
+        public IActionResult DeleteSupplierProduct(int id)
         {
             try
             {
-                var selectedObject = _context.Categories.Where(u => u.CategoryId == id).Select(u => u.CategoryId).SingleOrDefault();
+                var selectedObject = _context.SupplierProducts.Where(p => p.ProductId == id).SingleOrDefault();
                 _context.Remove(selectedObject);
                 _context.SaveChanges();
-                return Ok("code worked");
+                return Ok("product removed");
             }
             catch
             {
-                return NotFound("no object");
+                return NotFound("no product found");
             }
-        } 
-        
-           
-
-            
+        }
     }
-
 }
