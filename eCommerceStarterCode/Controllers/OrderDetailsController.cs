@@ -78,7 +78,7 @@ namespace eCommerceStarterCode.Controllers
             return StatusCode(200, value);
         }
 
-        // DELETE api/<OrderHeaderController>/5
+        // DELETE api/<OrderDetailController>/5
         [HttpDelete("{id}"), Authorize]
         public IActionResult Delete(int id)
         {

@@ -48,15 +48,15 @@ namespace eCommerceStarterCode.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "6226a161-0913-498e-af11-15a90e7f7fed",
-                            ConcurrencyStamp = "68053df2-eae3-4875-9025-18069de159a9",
+                            Id = "0b7b077a-ab1a-4574-8908-5c38758ef753",
+                            ConcurrencyStamp = "590a2c3b-021f-44fe-880c-949f8a03258d",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
-                            Id = "dab99fa9-4e3c-482a-b71c-0503272234f7",
-                            ConcurrencyStamp = "98ed6e6e-f14f-4ed3-a932-0a2bfb86148a",
+                            Id = "cf3a37f2-f4f4-41e9-8247-0c8b64d8f53c",
+                            ConcurrencyStamp = "e6c45377-c74a-460f-80b1-d18dd4564832",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
@@ -228,8 +228,11 @@ namespace eCommerceStarterCode.Migrations
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
 
-                    b.Property<int>("ExtPrice")
-                        .HasColumnType("int");
+                    b.Property<decimal>("ExtPrice")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("ProductPrice")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
@@ -254,6 +257,9 @@ namespace eCommerceStarterCode.Migrations
                     b.Property<string>("City")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("CountryCode")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("OrderDate")
                         .HasColumnType("datetime2");
 
@@ -263,8 +269,8 @@ namespace eCommerceStarterCode.Migrations
                     b.Property<string>("Street")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("TotalAmt")
-                        .HasColumnType("int");
+                    b.Property<decimal>("TotalAmt")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
@@ -317,6 +323,24 @@ namespace eCommerceStarterCode.Migrations
                             CategoryId = 1,
                             ProductAverageRating = 4m,
                             ProductDescription = "Han Solo Action Figure",
+                            ProductPrice = 15m,
+                            QuantityOnHand = 5
+                        },
+                        new
+                        {
+                            ProductId = 2,
+                            CategoryId = 1,
+                            ProductAverageRating = 4m,
+                            ProductDescription = "Luke Skywalker Action Figure",
+                            ProductPrice = 15m,
+                            QuantityOnHand = 5
+                        },
+                        new
+                        {
+                            ProductId = 3,
+                            CategoryId = 1,
+                            ProductAverageRating = 4m,
+                            ProductDescription = "Darth Vader Action Figure",
                             ProductPrice = 15m,
                             QuantityOnHand = 5
                         });

@@ -15,8 +15,8 @@ namespace eCommerceStarterCode.Data
         }
 
         public DbSet<SupplierProduct> SupplierProducts { get; set; } 
-        public  DbSet<AppRole> AppRoles { get; set; }
-        public  new DbSet<UserRole> UserRoles { get; set; }
+        public DbSet<AppRole> AppRoles { get; set; }
+        public new DbSet<UserRole> UserRoles { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<ProductReview> ProductReviews { get;  set; }
@@ -32,16 +32,6 @@ namespace eCommerceStarterCode.Data
                 optionsBuilder.UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=eCommerce;Trusted_");
             }
         }
-
-//        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-//        {
-//            if (!optionsBuilder.IsConfigured)
-//            {
-//              //#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-//                optionsBuilder.UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=ECommerce;Trusted_Connection=True;");
-//            }
-//        }
-
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
