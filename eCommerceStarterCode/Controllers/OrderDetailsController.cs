@@ -12,11 +12,11 @@ namespace eCommerceStarterCode.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class OrderDetailsController : ControllerBase
+    public class OrderDetailController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
 
-        public OrderDetailsController(ApplicationDbContext context)
+        public OrderDetailController(ApplicationDbContext context)
         {
             _context = context;
         }
@@ -29,13 +29,13 @@ namespace eCommerceStarterCode.Controllers
             return Ok(orderDetail);
         }
 
-        // GET api/<OrderDetailController>/5
-        [HttpGet("{id}"), Authorize]
+        // GET api/<OrderDetailController>/order/5
+        [HttpGet("order/{id}"), Authorize]
         public IActionResult GetOrderDetailById(int id)
         {
             try
             {
-                var orderDetail = _context.OrderDetail.Where(oh => oh.OrderId == id).SingleOrDefault();
+                var orderDetail = _context.OrderDetail.Where(oh => oh.OrderId == id);
                 return Ok(orderDetail);
             }
             catch
@@ -44,13 +44,13 @@ namespace eCommerceStarterCode.Controllers
             }
         }
 
-        // GET api/<OrderDetailController>/5
-        [HttpGet("{id}"), Authorize]
+        // GET api/<OrderDetailController>/product/5
+        [HttpGet("product/{id}"), Authorize]
         public IActionResult GetOrderDetailByProduct(int id)
         {
             try
             {
-                var orderDetail = _context.OrderDetail.Where(oh => oh.ProductId == id).SingleOrDefault();
+                var orderDetail = _context.OrderDetail.Where(oh => oh.ProductId == id);
                 return Ok(orderDetail);
             }
             catch
@@ -78,7 +78,7 @@ namespace eCommerceStarterCode.Controllers
             return StatusCode(200, value);
         }
 
-        // DELETE api/<OrderHeaderController>/5
+        // DELETE api/<OrderDetailController>/5
         [HttpDelete("{id}"), Authorize]
         public IActionResult Delete(int id)
         {

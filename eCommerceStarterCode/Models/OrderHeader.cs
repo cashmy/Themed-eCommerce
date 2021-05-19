@@ -21,7 +21,8 @@ namespace eCommerceStarterCode.Models
         public string City { get; set; }
         public string State { get; set; }
         public string ZipCode { get; set; }
-        public int TotalAmt { get; set; }
+        public string CountryCode { get; set; }
+        public decimal TotalAmt { get; set; }
         public DateTime OrderDate { get; set; }
 
 
