@@ -46,6 +46,15 @@ namespace eCommerceStarterCode.Controllers
             
         }
 
+        [HttpPut("{id}/edit"), Authorize]
+        public IActionResult EditUser(string id, [FromBody]User value)
+        {
+            var user = _context.Users.Where(u => u.Id == id).SingleOrDefault();
+            _context.Update(value);
+            _context.SaveChanges();
+            return Ok();
+        }
+
         [HttpDelete("{id}/delete"), Authorize]
         public IActionResult DeleteUser(string id)
         {
