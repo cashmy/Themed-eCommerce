@@ -10,8 +10,8 @@ using eCommerceStarterCode.Data;
 namespace eCommerceStarterCode.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210518180505_intialmigrationcm")]
-    partial class intialmigrationcm
+    [Migration("20210519165228_orderdetailextprice")]
+    partial class orderdetailextprice
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -50,15 +50,15 @@ namespace eCommerceStarterCode.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "2c470286-80b5-49e5-92c3-aa220aa8d166",
-                            ConcurrencyStamp = "23394721-5c93-445a-94c9-dde894785faa",
+                            Id = "afd38af6-dcde-42ec-adbb-29d81a1265e0",
+                            ConcurrencyStamp = "e094b27f-8b35-4a63-b6bb-328130e6a663",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
-                            Id = "70fdd0b9-ce0e-4be8-9599-8e33fb446184",
-                            ConcurrencyStamp = "6acc2957-ee25-44f4-a98e-4860dcdae4c3",
+                            Id = "66cb27a3-03e6-4096-850a-2076c555a69c",
+                            ConcurrencyStamp = "c9a2b8fb-9c90-4c11-b5c1-8008d386d0a2",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
@@ -222,6 +222,68 @@ namespace eCommerceStarterCode.Migrations
                         });
                 });
 
+            modelBuilder.Entity("eCommerceStarterCode.Models.OrderDetail", b =>
+                {
+                    b.Property<int>("OrderId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("ExtPrice")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("ProductPrice")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.HasKey("OrderId", "ProductId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("OrderDetail");
+                });
+
+            modelBuilder.Entity("eCommerceStarterCode.Models.OrderHeader", b =>
+                {
+                    b.Property<int>("OrderId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Address2")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("City")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("OrderDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("State")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Street")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("TotalAmt")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ZipCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("OrderId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("OrderHeader");
+                });
+
             modelBuilder.Entity("eCommerceStarterCode.Models.Product", b =>
                 {
                     b.Property<int>("ProductId")
@@ -260,6 +322,24 @@ namespace eCommerceStarterCode.Migrations
                             CategoryId = 1,
                             ProductAverageRating = 4m,
                             ProductDescription = "Han Solo Action Figure",
+                            ProductPrice = 15m,
+                            QuantityOnHand = 5
+                        },
+                        new
+                        {
+                            ProductId = 2,
+                            CategoryId = 1,
+                            ProductAverageRating = 4m,
+                            ProductDescription = "Luke Skywalker Action Figure",
+                            ProductPrice = 15m,
+                            QuantityOnHand = 5
+                        },
+                        new
+                        {
+                            ProductId = 3,
+                            CategoryId = 1,
+                            ProductAverageRating = 4m,
+                            ProductDescription = "Darth Vader Action Figure",
                             ProductPrice = 15m,
                             QuantityOnHand = 5
                         });
@@ -460,6 +540,34 @@ namespace eCommerceStarterCode.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("eCommerceStarterCode.Models.OrderDetail", b =>
+                {
+                    b.HasOne("eCommerceStarterCode.Models.OrderHeader", "OrderHeader")
+                        .WithMany()
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("eCommerceStarterCode.Models.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("OrderHeader");
+
+                    b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("eCommerceStarterCode.Models.OrderHeader", b =>
+                {
+                    b.HasOne("eCommerceStarterCode.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("eCommerceStarterCode.Models.Product", b =>

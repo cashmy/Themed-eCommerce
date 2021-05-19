@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using eCommerceStarterCode.Data;
 
 namespace eCommerceStarterCode.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210519162233_initialmigration")]
+    partial class initialmigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -48,15 +50,15 @@ namespace eCommerceStarterCode.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "0b7b077a-ab1a-4574-8908-5c38758ef753",
-                            ConcurrencyStamp = "590a2c3b-021f-44fe-880c-949f8a03258d",
+                            Id = "b35da6ef-681e-4494-8ef7-521e87be3c4a",
+                            ConcurrencyStamp = "e8747357-61a1-4aec-bbf5-ecf30f339d7b",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
-                            Id = "cf3a37f2-f4f4-41e9-8247-0c8b64d8f53c",
-                            ConcurrencyStamp = "e6c45377-c74a-460f-80b1-d18dd4564832",
+                            Id = "4a1fff2d-63c1-4631-8109-6e2e916ea90e",
+                            ConcurrencyStamp = "e8f90239-63f9-41b0-9517-9177f7566645",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
@@ -228,8 +230,8 @@ namespace eCommerceStarterCode.Migrations
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
 
-                    b.Property<decimal>("ExtPrice")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<int>("ExtPrice")
+                        .HasColumnType("int");
 
                     b.Property<decimal>("ProductPrice")
                         .HasColumnType("decimal(18,2)");
@@ -257,9 +259,6 @@ namespace eCommerceStarterCode.Migrations
                     b.Property<string>("City")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("CountryCode")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime>("OrderDate")
                         .HasColumnType("datetime2");
 
@@ -269,8 +268,8 @@ namespace eCommerceStarterCode.Migrations
                     b.Property<string>("Street")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal>("TotalAmt")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<int>("TotalAmt")
+                        .HasColumnType("int");
 
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");

@@ -20,7 +20,10 @@ namespace eCommerceStarterCode.Models
         public Product Product { get; set; }
 
         public int Quantity { get; set; }
-        public int ExtPrice { get; set; }
+
+        public decimal ProductPrice { get; set; }
+
+        public decimal ExtPrice { get; set; }
 
     }
 }
