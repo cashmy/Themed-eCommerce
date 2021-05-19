@@ -20,14 +20,14 @@ namespace eCommerceStarterCode.Controllers
             _context = context;
         }
         // <baseurl>/api/products
-        [HttpGet("getAll")]
+        [HttpGet()]
         public IActionResult GetProductReviews()
         {
             var productReviews = _context.ProductReviews;
             return Ok(productReviews);
         }
 
-        [HttpGet("{id}/getUserReviews"), Authorize]
+        [HttpGet("{id}/serReviews"), Authorize]
         public IActionResult UserReviews(string id)
         {
             try
@@ -65,19 +65,38 @@ namespace eCommerceStarterCode.Controllers
         [HttpPost("create"), Authorize]
         public IActionResult CreateProductReview([FromBody] ProductReview value)
         {
-            /// Currently hard coded... Need to pass parameters
-            _context.ProductReviews.Add(value);
-            _context.SaveChanges();
-            return StatusCode(201, value);
+            try
+            {
+                _context.ProductReviews.Add(value);
+                _context.SaveChanges();
+                return StatusCode(201, value);
+
+            }
+            catch
+            {
+                return NotFound();
+
+            }
+            
         }
 
-        [HttpDelete("{productId}/{id}/deleteReview"), Authorize]
+        [HttpDelete("/{id}/{productId}/deleteReview"), Authorize]
         public IActionResult DeleteProductReivew(string id, int productId)
         {
-            var review = _context.ProductReviews.Where(u => (u.UserId == id && u.ProductId == productId)).SingleOrDefault();
-            _context.Remove(review);
-            _context.SaveChanges();
-            return Ok();
+            try
+            {
+                var review = _context.ProductReviews.Where(u => (u.UserId == id && u.ProductId == productId)).SingleOrDefault();
+                _context.Remove(review);
+                _context.SaveChanges();
+                return Ok();
+
+            }
+            catch
+            {
+                return NotFound("Could not delete record.");
+
+            }
+            
         }
     }
 }
