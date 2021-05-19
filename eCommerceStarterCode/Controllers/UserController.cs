@@ -20,7 +20,7 @@ namespace eCommerceStarterCode.Controllers
         {
             _context = context;
         }
-        [HttpGet("allUsers"), Authorize]
+        [HttpGet("allUsers")]
         public IActionResult GetAllUsers()
         {
             var users = _context.Users.ToList();
@@ -49,10 +49,11 @@ namespace eCommerceStarterCode.Controllers
         [HttpPut("{id}/edit"), Authorize]
         public IActionResult EditUser(string id, [FromBody]User value)
         {
+
             var user = _context.Users.Where(u => u.Id == id).SingleOrDefault();
-            _context.Update(value);
+            _context.Users.Update(value);
             _context.SaveChanges();
-            return Ok();
+            return Ok(user);
         }
 
         [HttpDelete("{id}/delete"), Authorize]
@@ -74,8 +75,8 @@ namespace eCommerceStarterCode.Controllers
         }
 
 
-        [HttpPost("{id}/setRole"), Authorize]
-        public IActionResult GetRoleStatus(string id)
+        [HttpPost("{id}/setRole")]
+        public IActionResult setRoleStatus(string id)
         {
             var userId = _context.Users.Where(u => u.Id == id).SingleOrDefault();
             bool isSupplier = _context.Users.Where(u => u.Id == id).Select(u => u.IsSupplier).SingleOrDefault();
