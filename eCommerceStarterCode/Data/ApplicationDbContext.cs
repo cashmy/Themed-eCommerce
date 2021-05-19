@@ -16,12 +16,14 @@ namespace eCommerceStarterCode.Data
 
         public DbSet<SupplierProduct> SupplierProducts { get; set; } 
         public  DbSet<AppRole> AppRoles { get; set; }
-        public  DbSet<UserRole> UserRoles { get; set; }
+        public  new DbSet<UserRole> UserRoles { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<ProductReview> ProductReviews { get;  set; }
         public DbSet<ShoppingCart> ShoppingCarts { get; set; }
         public IEnumerable<object> ShoppingCart { get; internal set; }
+        public DbSet<OrderHeader> OrderHeader { get; set; }
+        public DbSet<OrderDetail> OrderDetail { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -48,10 +50,11 @@ namespace eCommerceStarterCode.Data
                 .HasData(
                     new Category { CategoryId = 1, CategoryDescription = "Action Figure" });
             modelBuilder.Entity<Product>()
-            .HasData(
-            new Product { ProductId = 1, ProductDescription = "Han Solo Action Figure", ProductPrice = 15, QuantityOnHand = 5, ProductAverageRating = 4, CategoryId=1 }  
-            );
-
+                .HasData(
+                    new Product { ProductId = 1, ProductDescription = "Han Solo Action Figure", ProductPrice = 15, QuantityOnHand = 5, ProductAverageRating = 4, CategoryId = 1 },
+                    new Product { ProductId = 2, ProductDescription = "Luke Skywalker Action Figure", ProductPrice = 15, QuantityOnHand = 5, ProductAverageRating = 4, CategoryId = 1 },
+                    new Product { ProductId = 3, ProductDescription = "Darth Vader Action Figure", ProductPrice = 15, QuantityOnHand = 5, ProductAverageRating = 4, CategoryId = 1 }
+                    );
             modelBuilder.ApplyConfiguration(new RolesConfiguration());
             modelBuilder.Entity<SupplierProduct>().HasKey(sp => new { sp.UserId, sp.ProductId });
             modelBuilder.Entity<User>();
@@ -64,6 +67,8 @@ namespace eCommerceStarterCode.Data
                     new AppRole { RoleId = 3, RoleName= "Admin" }
 
                 );
+            modelBuilder.Entity<OrderHeader>();
+            modelBuilder.Entity<OrderDetail>().HasKey(od => new { od.OrderId, od.ProductId });
         }
 
     }
