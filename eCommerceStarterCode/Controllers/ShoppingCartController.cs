@@ -23,7 +23,7 @@ namespace eCommerceStarterCode.Controllers
             _context = context;
         }
         [HttpGet("{userId}"), Authorize]
-        public IActionResult GetCurrentUserCart(string id)
+        public IActionResult GetCurrentUserCart(string userId)
         {
             var userCart = _context.ShoppingCarts.Where(u => u.UserId == userId).Select(u => new { u.ProductId, u.Quantity });
             return Ok(userCart);
