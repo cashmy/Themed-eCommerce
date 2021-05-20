@@ -22,7 +22,7 @@ namespace eCommerceStarterCode.Controllers
         }
 
         // GET: api/<OrderDetailController>
-        [HttpGet, Authorize]
+        [HttpGet]
         public IActionResult Get()
         {
             var orderDetail = _context.OrderDetail;
