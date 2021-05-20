@@ -15,10 +15,13 @@ namespace eCommerceStarterCode.Models
         public int QuantityOnHand { get; set; }
         public decimal ProductAverageRating { get; set; }
         public byte[] ProductImage { get; set; }
-
+        
         //Add a foreign key to the category file
+
         [ForeignKey("Category")]
-        public int CategoryId { get; set; }
+
+        public int CategoryId { get; set;}
+
         public Category Category { get; set; }
     }
 }
