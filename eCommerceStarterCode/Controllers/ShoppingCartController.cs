@@ -22,10 +22,10 @@ namespace eCommerceStarterCode.Controllers
         {
             _context = context;
         }
-        [HttpGet("{id}"), Authorize]
+        [HttpGet("{userId}"), Authorize]
         public IActionResult GetCurrentUserCart(string id)
         {
-            var userCart = _context.ShoppingCarts.Where(u => u.UserId == id).Select(u => new { u.ProductId, u.Quantity });
+            var userCart = _context.ShoppingCarts.Where(u => u.UserId == userId).Select(u => new { u.ProductId, u.Quantity });
             return Ok(userCart);
         }
 
