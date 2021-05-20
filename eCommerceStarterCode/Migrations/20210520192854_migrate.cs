@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace eCommerceStarterCode.Migrations
 {
-    public partial class initialmigration : Migration
+    public partial class migrate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -194,7 +194,8 @@ namespace eCommerceStarterCode.Migrations
                     City = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     State = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ZipCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    TotalAmt = table.Column<int>(type: "int", nullable: false),
+                    CountryCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TotalAmt = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     OrderDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
@@ -238,6 +239,7 @@ namespace eCommerceStarterCode.Migrations
                 {
                     ProductId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    ProductName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ProductDescription = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ProductPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     QuantityOnHand = table.Column<int>(type: "int", nullable: false),
@@ -264,7 +266,7 @@ namespace eCommerceStarterCode.Migrations
                     ProductId = table.Column<int>(type: "int", nullable: false),
                     Quantity = table.Column<int>(type: "int", nullable: false),
                     ProductPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    ExtPrice = table.Column<int>(type: "int", nullable: false)
+                    ExtPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -373,8 +375,8 @@ namespace eCommerceStarterCode.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "b35da6ef-681e-4494-8ef7-521e87be3c4a", "e8747357-61a1-4aec-bbf5-ecf30f339d7b", "User", "USER" },
-                    { "4a1fff2d-63c1-4631-8109-6e2e916ea90e", "e8f90239-63f9-41b0-9517-9177f7566645", "Admin", "ADMIN" }
+                    { "1f2e482b-6ca4-490f-9945-8dfe82fec189", "15ea93f4-5d49-415c-8db1-6d71305ea169", "User", "USER" },
+                    { "d541f911-604e-4bdc-b726-74d564afc73f", "49ef9a05-64c2-42b2-b564-e413ed515964", "Admin", "ADMIN" }
                 });
 
             migrationBuilder.InsertData(
@@ -384,18 +386,18 @@ namespace eCommerceStarterCode.Migrations
 
             migrationBuilder.InsertData(
                 table: "Products",
-                columns: new[] { "ProductId", "CategoryId", "ProductAverageRating", "ProductDescription", "ProductImage", "ProductPrice", "QuantityOnHand" },
-                values: new object[] { 1, 1, 4m, "Han Solo Action Figure", null, 15m, 5 });
+                columns: new[] { "ProductId", "CategoryId", "ProductAverageRating", "ProductDescription", "ProductImage", "ProductName", "ProductPrice", "QuantityOnHand" },
+                values: new object[] { 1, 1, 4m, "Han Solo Action Figure", null, null, 15m, 5 });
 
             migrationBuilder.InsertData(
                 table: "Products",
-                columns: new[] { "ProductId", "CategoryId", "ProductAverageRating", "ProductDescription", "ProductImage", "ProductPrice", "QuantityOnHand" },
-                values: new object[] { 2, 1, 4m, "Luke Skywalker Action Figure", null, 15m, 5 });
+                columns: new[] { "ProductId", "CategoryId", "ProductAverageRating", "ProductDescription", "ProductImage", "ProductName", "ProductPrice", "QuantityOnHand" },
+                values: new object[] { 2, 1, 4m, "Luke Skywalker Action Figure", null, null, 15m, 5 });
 
             migrationBuilder.InsertData(
                 table: "Products",
-                columns: new[] { "ProductId", "CategoryId", "ProductAverageRating", "ProductDescription", "ProductImage", "ProductPrice", "QuantityOnHand" },
-                values: new object[] { 3, 1, 4m, "Darth Vader Action Figure", null, 15m, 5 });
+                columns: new[] { "ProductId", "CategoryId", "ProductAverageRating", "ProductDescription", "ProductImage", "ProductName", "ProductPrice", "QuantityOnHand" },
+                values: new object[] { 3, 1, 4m, "Darth Vader Action Figure", null, null, 15m, 5 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",

@@ -21,13 +21,20 @@ namespace eCommerceStarterCode.Controllers
         }
         // <baseurl>/api/products
         [HttpGet()]
-        public IActionResult GetProductReviews()
+        public IActionResult GetAllReviews()
         {
             var productReviews = _context.ProductReviews;
             return Ok(productReviews);
         }
 
-        [HttpGet("{id}/serReviews"), Authorize]
+        [HttpGet("{productId}")]
+        public IActionResult GetProductReview(int productId)
+        {
+            var productReview = _context.ProductReviews.Where(p => p.ProductId == productId).ToList();
+            return Ok(productReview);
+        }
+
+        [HttpGet("{id}/userReviews"), Authorize]
         public IActionResult UserReviews(string id)
         {
             try

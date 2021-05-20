@@ -48,15 +48,15 @@ namespace eCommerceStarterCode.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "0b7b077a-ab1a-4574-8908-5c38758ef753",
-                            ConcurrencyStamp = "590a2c3b-021f-44fe-880c-949f8a03258d",
+                            Id = "a3d4c66b-b241-4f45-bd9b-05c48915c2d1",
+                            ConcurrencyStamp = "ef244d19-99cb-4ec7-a874-2c803b4814e7",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
-                            Id = "cf3a37f2-f4f4-41e9-8247-0c8b64d8f53c",
-                            ConcurrencyStamp = "e6c45377-c74a-460f-80b1-d18dd4564832",
+                            Id = "05c81cb6-972d-4d88-b7c0-04744b9dea5d",
+                            ConcurrencyStamp = "6a5187b8-66ad-4486-8110-385e20d49ce3",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
@@ -303,6 +303,9 @@ namespace eCommerceStarterCode.Migrations
 
                     b.Property<byte[]>("ProductImage")
                         .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("ProductName")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("ProductPrice")
                         .HasColumnType("decimal(18,2)");

@@ -10,7 +10,7 @@ using eCommerceStarterCode.Data;
 namespace eCommerceStarterCode.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210520161643_migrate")]
+    [Migration("20210520192854_migrate")]
     partial class migrate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -50,15 +50,15 @@ namespace eCommerceStarterCode.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "2e73aadc-6981-4b46-9f86-b8f09f011c0d",
-                            ConcurrencyStamp = "d037e0cb-0f0c-48cb-92ff-5fef2c532220",
+                            Id = "1f2e482b-6ca4-490f-9945-8dfe82fec189",
+                            ConcurrencyStamp = "15ea93f4-5d49-415c-8db1-6d71305ea169",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
-                            Id = "f7ed1522-1fcf-4b93-a01a-56056f73a650",
-                            ConcurrencyStamp = "56ed0e91-0ece-4645-9d5a-f5a49ac6859a",
+                            Id = "d541f911-604e-4bdc-b726-74d564afc73f",
+                            ConcurrencyStamp = "49ef9a05-64c2-42b2-b564-e413ed515964",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
@@ -262,8 +262,8 @@ namespace eCommerceStarterCode.Migrations
                     b.Property<string>("CountryCode")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("OrderDate")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime>("OrderDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("State")
                         .HasColumnType("nvarchar(max)");
@@ -305,6 +305,9 @@ namespace eCommerceStarterCode.Migrations
 
                     b.Property<byte[]>("ProductImage")
                         .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("ProductName")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("ProductPrice")
                         .HasColumnType("decimal(18,2)");
