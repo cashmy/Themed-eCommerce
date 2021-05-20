@@ -22,7 +22,6 @@ namespace eCommerceStarterCode.Controllers
         }
 
         // GET: api/<OrderDetailController>
-        // removed Authorize
         [HttpGet]
         public IActionResult Get()
         {
