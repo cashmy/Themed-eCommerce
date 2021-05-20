@@ -10,8 +10,8 @@ using eCommerceStarterCode.Data;
 namespace eCommerceStarterCode.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210520161643_migrate")]
-    partial class migrate
+    [Migration("20210520184054_migration")]
+    partial class migration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -50,15 +50,15 @@ namespace eCommerceStarterCode.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "2e73aadc-6981-4b46-9f86-b8f09f011c0d",
-                            ConcurrencyStamp = "d037e0cb-0f0c-48cb-92ff-5fef2c532220",
+                            Id = "02104955-70de-4827-8d0d-e8f373da9aef",
+                            ConcurrencyStamp = "ee2e9c50-b26a-42c7-8a60-9bf45d5f50c2",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
-                            Id = "f7ed1522-1fcf-4b93-a01a-56056f73a650",
-                            ConcurrencyStamp = "56ed0e91-0ece-4645-9d5a-f5a49ac6859a",
+                            Id = "0197b9b9-d883-45ca-8d3c-f1640bb7caa9",
+                            ConcurrencyStamp = "622d0689-ffb0-43d5-a6c6-2dc92c619e36",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
@@ -262,8 +262,8 @@ namespace eCommerceStarterCode.Migrations
                     b.Property<string>("CountryCode")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("OrderDate")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime>("OrderDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("State")
                         .HasColumnType("nvarchar(max)");

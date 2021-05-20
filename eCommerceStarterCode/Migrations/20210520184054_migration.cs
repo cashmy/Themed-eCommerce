@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace eCommerceStarterCode.Migrations
 {
-    public partial class initialmigration : Migration
+    public partial class migration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -194,7 +194,8 @@ namespace eCommerceStarterCode.Migrations
                     City = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     State = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ZipCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    TotalAmt = table.Column<int>(type: "int", nullable: false),
+                    CountryCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TotalAmt = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     OrderDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
@@ -264,7 +265,7 @@ namespace eCommerceStarterCode.Migrations
                     ProductId = table.Column<int>(type: "int", nullable: false),
                     Quantity = table.Column<int>(type: "int", nullable: false),
                     ProductPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    ExtPrice = table.Column<int>(type: "int", nullable: false)
+                    ExtPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -373,8 +374,8 @@ namespace eCommerceStarterCode.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "b35da6ef-681e-4494-8ef7-521e87be3c4a", "e8747357-61a1-4aec-bbf5-ecf30f339d7b", "User", "USER" },
-                    { "4a1fff2d-63c1-4631-8109-6e2e916ea90e", "e8f90239-63f9-41b0-9517-9177f7566645", "Admin", "ADMIN" }
+                    { "02104955-70de-4827-8d0d-e8f373da9aef", "ee2e9c50-b26a-42c7-8a60-9bf45d5f50c2", "User", "USER" },
+                    { "0197b9b9-d883-45ca-8d3c-f1640bb7caa9", "622d0689-ffb0-43d5-a6c6-2dc92c619e36", "Admin", "ADMIN" }
                 });
 
             migrationBuilder.InsertData(
