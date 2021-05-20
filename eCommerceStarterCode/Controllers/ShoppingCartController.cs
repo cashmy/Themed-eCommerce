@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace eCommerceStarterCode.Controllers
 {
-    [Route("api/ShoppingCart")]
+    [Route("api/[controller]")]
     [ApiController]
     public class ShoppingCartController : ControllerBase
     {
@@ -29,6 +29,18 @@ namespace eCommerceStarterCode.Controllers
             return Ok(userCart);
         }
 
+        [HttpPut("{userId}/{productId}"), Authorize]
+
+        public IActionResult Put(string userId, int productId, [FromBody]ShoppingCart value)
+        {
+            var item = _context.ShoppingCarts.Where(u => (u.UserId == userId && u.ProductId == productId)).SingleOrDefault();
+            _context.ShoppingCarts.Remove(item);
+            _context.SaveChanges();
+            _context.ShoppingCarts.Add(value);
+            return Ok(value);
+
+        }
+
         [HttpPost("{userId}/{productId}"), Authorize]
 
         public IActionResult Post(string userId, int productId, [FromBody] ShoppingCart value)
@@ -37,15 +49,15 @@ namespace eCommerceStarterCode.Controllers
             if (selectedObject != null)
             {
                 selectedObject.Quantity += 1;
-                return RedirectToAction("Put", new { userid = selectedObject.UserId, productId = selectedObject.ProductId, body = value });
+                _context.ShoppingCarts.Update(selectedObject);
             } else {
                 _context.ShoppingCarts.Add(value);
-                _context.SaveChanges();
-                return StatusCode(201, value);
             }
+                _context.SaveChanges();
+                return StatusCode(201, selectedObject);
         }
 
-        [HttpDelete("{id}/{productId}/delete"), Authorize ]
+        [HttpDelete("{id}/{productId}"), Authorize ]
         public IActionResult Delete(string id, int productId)
         {
 
@@ -55,17 +67,6 @@ namespace eCommerceStarterCode.Controllers
             return Ok();
         }
 
-        [HttpPut("{id}/{productId}/edit"), Authorize]
-
-        public IActionResult Put(string id, int productId, [FromBody]ShoppingCart value)
-        {
-            var item = _context.ShoppingCarts.Where(u => (u.UserId == id && u.ProductId == productId)).SingleOrDefault();
-            _context.ShoppingCarts.Remove(item);
-            _context.SaveChanges();
-            _context.ShoppingCarts.Add(value);
-            return Ok(value);
-
-        }
 
 
 
