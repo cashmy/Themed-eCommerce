@@ -22,20 +22,27 @@ namespace eCommerceStarterCode.Controllers
         {
             _context = context;
         }
-        [HttpGet("{id}/cart"), Authorize]
+        [HttpGet("{id}"), Authorize]
         public IActionResult GetCurrentUserCart(string id)
         {
             var userCart = _context.ShoppingCarts.Where(u => u.UserId == id).Select(u => new { u.ProductId, u.Quantity });
             return Ok(userCart);
         }
 
-        [HttpPost("{id}/postCart"), Authorize]
+        [HttpPost("{userId}/{productId}"), Authorize]
 
-        public IActionResult Post([FromBody] ShoppingCart value)
+        public IActionResult Post(string userId, int productId, [FromBody] ShoppingCart value)
         {
-            _context.ShoppingCarts.Add(value);
-            _context.SaveChanges();
-            return StatusCode(201, value);
+            var selectedObject = _context.ShoppingCarts.Where(sc => (sc.UserId == userId && sc.ProductId == productId)).SingleOrDefault();
+            if (selectedObject != null)
+            {
+                selectedObject.Quantity += 1;
+                return RedirectToAction("Put", new { userid = selectedObject.UserId, productId = selectedObject.ProductId, body = value });
+            } else {
+                _context.ShoppingCarts.Add(value);
+                _context.SaveChanges();
+                return StatusCode(201, value);
+            }
         }
 
         [HttpDelete("{id}/{productId}/delete"), Authorize ]
