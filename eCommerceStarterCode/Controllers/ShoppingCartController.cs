@@ -48,7 +48,7 @@ namespace eCommerceStarterCode.Controllers
             var selectedObject = _context.ShoppingCarts.Where(sc => (sc.UserId == userId && sc.ProductId == productId)).SingleOrDefault();
             if (selectedObject != null)
             {
-                selectedObject.Quantity += 1;
+                selectedObject.Quantity = selectedObject.Quantity + value.Quantity;
                 _context.ShoppingCarts.Update(selectedObject);
             } else {
                 _context.ShoppingCarts.Add(value);
