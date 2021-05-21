@@ -1,13 +1,9 @@
 ﻿using eCommerceStarterCode.Data;
 using eCommerceStarterCode.Models;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
-using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 
 
@@ -32,7 +28,7 @@ namespace eCommerceStarterCode.Controllers
             var user = _context.Users.Find(userId);
             if (user == null)
             {
-                return NotFound();
+                return NotFound("User not found");
             }
 
             var userCart = _context.ShoppingCarts
@@ -40,6 +36,25 @@ namespace eCommerceStarterCode.Controllers
                 .Select(uc => new { uc.UserId, uc.ProductId, uc.Product.ProductName, uc.Product.ProductDescription, uc.Quantity, uc.Product.ProductPrice, ExtPrice = uc.Quantity * uc.Product.ProductPrice})
                 .ToList();
             return Ok(userCart);
+        }
+
+        [HttpGet("count"), Authorize]
+        public IActionResult GetItemCount()
+        {
+            var userId = User.FindFirstValue("id");
+            var user = _context.Users.Find(userId);
+            if (user == null)
+            {
+                return NotFound("User not found");
+            }
+
+            var userCart = _context.ShoppingCarts
+                .GroupBy(uc => uc.UserId)
+                .Select(uc => new { Count = uc.Count() });
+
+            // returns {count: <int>}
+            return Ok(userCart);
+
         }
 
         [HttpPut("{productId}"), Authorize]
@@ -50,7 +65,7 @@ namespace eCommerceStarterCode.Controllers
             var user = _context.Users.Find(userId);
             if (user == null)
             {
-                return NotFound();
+                return NotFound("User not found");
             }
 
             var item = _context.ShoppingCarts.Where(u => (u.UserId == userId && u.ProductId == productId)).SingleOrDefault();
@@ -69,7 +84,7 @@ namespace eCommerceStarterCode.Controllers
             var user = _context.Users.Find(userId);
             if (user == null)
             {
-                return NotFound();
+                return NotFound("User not found");
             }
 
             var selectedObject = _context.ShoppingCarts.Where(sc => (sc.UserId == userId && sc.ProductId == productId)).SingleOrDefault();
@@ -91,7 +106,7 @@ namespace eCommerceStarterCode.Controllers
             var user = _context.Users.Find(userId);
             if (user == null)
             {
-                return NotFound();
+                return NotFound("User not found");
             }
 
             var item = _context.ShoppingCarts.Where(u => (u.UserId == userId && u.ProductId == productId)).SingleOrDefault();
