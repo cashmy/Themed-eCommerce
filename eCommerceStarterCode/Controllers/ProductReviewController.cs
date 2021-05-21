@@ -68,15 +68,94 @@ namespace eCommerceStarterCode.Controllers
 
         }
 
+        // POST /api/ProductReview
+        [HttpPost("rating/{id}/{productId}"), Authorize]
+        public IActionResult AddRating(string id, int productId, [FromBody] ProductReview value)
+        {
+            try
+            {   var user = _context.ProductReviews.Where(u => u.UserId == id).Select(u => u.UserId).SingleOrDefault();
+                var product = _context.ProductReviews.Where(u => u.ProductId == productId).Select(u => u.ProductId).SingleOrDefault();
+                var reviewText = _context.ProductReviews.Select(u => u.ReviewText).SingleOrDefault();
+                var review = _context.ProductReviews.Where(u => (u.UserId == id && u.ProductId == productId)).SingleOrDefault();
+                
+                if (user == null || product == 0)
+                {
+                    ProductReview newReview = new ProductReview(){ 
+                        UserId = id,
+                        ProductId = productId,
+                        ReviewRating = Convert.ToInt32(value.ReviewRating),
+                        ReviewText = null,
+
+                    };
+                    _context.ProductReviews.Add(newReview);
+                    _context.SaveChanges();
+                    return StatusCode(201, newReview);
+                }
+                else
+                {
+                    ProductReview updateReview = new ProductReview() { 
+                        UserId = id,
+                        ProductId = productId,
+                        ReviewRating = Convert.ToInt32(value.ReviewRating),
+                        ReviewText = reviewText
+                    };
+                    _context.ProductReviews.Remove(review);
+                    _context.ProductReviews.Add(updateReview);
+                    _context.SaveChanges();
+                    return StatusCode(201, updateReview);
+
+                }
+                 
+                
+
+            }
+            catch
+            {
+                return NotFound();
+
+            }
+            
+        }     
         // POST /api/product
-        [HttpPost("create"), Authorize]
-        public IActionResult CreateProductReview([FromBody] ProductReview value)
+        [HttpPost("review/{id}/{productId}"), Authorize]
+        public IActionResult AddReview(string id, int productId, [FromBody] ProductReview value)
         {
             try
             {
-                _context.ProductReviews.Add(value);
-                _context.SaveChanges();
-                return StatusCode(201, value);
+                var user = _context.ProductReviews.Where(u => u.UserId == id).Select(u => u.UserId).SingleOrDefault();
+                var product = _context.ProductReviews.Where(u => u.ProductId == productId).Select(u => u.ProductId).SingleOrDefault();
+                var reviewRating = _context.ProductReviews.Where(u => (u.UserId == id && u.ProductId == productId)).Select(u=>u.ReviewRating).SingleOrDefault();
+                var review = _context.ProductReviews.Where(u => (u.UserId == id && u.ProductId == productId)).SingleOrDefault();
+                if (user == null | product == 0)
+                {
+                    ProductReview newReview = new ProductReview()
+                    {
+                        UserId = id,
+                        ProductId = productId,
+                        ReviewRating = 0,
+                        ReviewText = value.ReviewText,
+
+                    };
+                    _context.ProductReviews.Add(newReview);
+                    _context.SaveChanges();
+                    return StatusCode(201, value);
+                }
+                else
+                {
+                    ProductReview updateReview = new ProductReview()
+                    {
+                        UserId = id,
+                        ProductId = productId,
+                        ReviewRating = Convert.ToInt32(reviewRating),
+                        ReviewText = value.ReviewText
+                    };
+                    _context.ProductReviews.Remove(review);
+                    _context.ProductReviews.Add(updateReview);
+                    _context.SaveChanges();
+                    return StatusCode(201, updateReview);
+
+                }
+
 
             }
             catch
