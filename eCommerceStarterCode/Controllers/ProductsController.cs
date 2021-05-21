@@ -21,14 +21,14 @@ namespace eCommerceStarterCode.Controllers
             _context = context;
         }
         // <baseurl>/api/products
-        [HttpGet, Authorize]
+        [HttpGet]
         public IActionResult Get()
         {
             var product = _context.Products;
             return Ok(product);
         }
 
-        [HttpGet("{productId}"), Authorize]
+        [HttpGet("{productId}")]
         public IActionResult GetById(int productId)
         {
             var product = _context.Products.Where(p => p.ProductId == productId).SingleOrDefault();

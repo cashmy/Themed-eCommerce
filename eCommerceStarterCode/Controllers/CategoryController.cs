@@ -32,7 +32,7 @@ namespace eCommerceStarterCode.Controllers
             return Ok(categories);
         }
 
-        [HttpPost, Authorize]
+        [HttpPost]
         public IActionResult Post([FromBody] Category value)
         {
             _context.Categories.Add(value);

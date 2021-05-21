@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace eCommerceStarterCode.Migrations
 {
-    public partial class migrate : Migration
+    public partial class initialmigrationcrm : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -243,7 +243,7 @@ namespace eCommerceStarterCode.Migrations
                     ProductDescription = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ProductPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     QuantityOnHand = table.Column<int>(type: "int", nullable: false),
-                    ProductAverageRating = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    ProductAverageRating = table.Column<decimal>(type: "decimal(18,1)", nullable: false),
                     ProductImage = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
                     CategoryId = table.Column<int>(type: "int", nullable: false)
                 },
@@ -375,8 +375,8 @@ namespace eCommerceStarterCode.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "1f2e482b-6ca4-490f-9945-8dfe82fec189", "15ea93f4-5d49-415c-8db1-6d71305ea169", "User", "USER" },
-                    { "d541f911-604e-4bdc-b726-74d564afc73f", "49ef9a05-64c2-42b2-b564-e413ed515964", "Admin", "ADMIN" }
+                    { "59452131-f19c-499d-bc3b-fabcb1dd21cc", "1587808d-2482-4af5-ae53-e1f9c05cce74", "User", "USER" },
+                    { "a95f00cc-6203-40d4-9b60-3a84042be72b", "474555a5-0d50-4cab-8366-d00afcca7e51", "Admin", "ADMIN" }
                 });
 
             migrationBuilder.InsertData(
@@ -387,17 +387,17 @@ namespace eCommerceStarterCode.Migrations
             migrationBuilder.InsertData(
                 table: "Products",
                 columns: new[] { "ProductId", "CategoryId", "ProductAverageRating", "ProductDescription", "ProductImage", "ProductName", "ProductPrice", "QuantityOnHand" },
-                values: new object[] { 1, 1, 4m, "Han Solo Action Figure", null, null, 15m, 5 });
+                values: new object[] { 1, 1, 4m, "Great For Kids", null, " Han Solo Action Figure", 15m, 5 });
 
             migrationBuilder.InsertData(
                 table: "Products",
                 columns: new[] { "ProductId", "CategoryId", "ProductAverageRating", "ProductDescription", "ProductImage", "ProductName", "ProductPrice", "QuantityOnHand" },
-                values: new object[] { 2, 1, 4m, "Luke Skywalker Action Figure", null, null, 15m, 5 });
+                values: new object[] { 2, 1, 4m, "Mint Condition", null, "Luke Skywalker Action Figure", 15m, 5 });
 
             migrationBuilder.InsertData(
                 table: "Products",
                 columns: new[] { "ProductId", "CategoryId", "ProductAverageRating", "ProductDescription", "ProductImage", "ProductName", "ProductPrice", "QuantityOnHand" },
-                values: new object[] { 3, 1, 4m, "Darth Vader Action Figure", null, null, 15m, 5 });
+                values: new object[] { 3, 1, 4m, "Still in the original box", null, "Darth Vader Action Figure", 15m, 5 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",

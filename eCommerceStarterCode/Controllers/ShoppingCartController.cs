@@ -8,6 +8,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+
+
 
 
 namespace eCommerceStarterCode.Controllers
@@ -22,17 +25,34 @@ namespace eCommerceStarterCode.Controllers
         {
             _context = context;
         }
-        [HttpGet("{userId}"), Authorize]
-        public IActionResult GetCurrentUserCart(string userId)
+        [HttpGet(), Authorize]
+        public IActionResult GetCurrentUserCart()
         {
-            var userCart = _context.ShoppingCarts.Where(u => u.UserId == userId).Select(u => new { u.ProductId, u.Quantity });
+            var userId = User.FindFirstValue("id");
+            var user = _context.Users.Find(userId);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            var userCart = _context.ShoppingCarts
+                .Include(uc => uc.Product)
+                .Select(uc => new { uc.UserId, uc.ProductId, uc.Product.ProductName, uc.Product.ProductDescription, uc.Quantity, uc.Product.ProductPrice, ExtPrice = uc.Quantity * uc.Product.ProductPrice})
+                .ToList();
             return Ok(userCart);
         }
 
-        [HttpPut("{userId}/{productId}"), Authorize]
+        [HttpPut("{productId}"), Authorize]
 
-        public IActionResult Put(string userId, int productId, [FromBody]ShoppingCart value)
+        public IActionResult Put(int productId, [FromBody]ShoppingCart value)
         {
+            var userId = User.FindFirstValue("id");
+            var user = _context.Users.Find(userId);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
             var item = _context.ShoppingCarts.Where(u => (u.UserId == userId && u.ProductId == productId)).SingleOrDefault();
             _context.ShoppingCarts.Remove(item);
             _context.SaveChanges();
@@ -41,10 +61,17 @@ namespace eCommerceStarterCode.Controllers
 
         }
 
-        [HttpPost("{userId}/{productId}"), Authorize]
+        [HttpPost("{productId}"), Authorize]
 
-        public IActionResult Post(string userId, int productId, [FromBody] ShoppingCart value)
+        public IActionResult Post(int productId, [FromBody] ShoppingCart value)
         {
+            var userId = User.FindFirstValue("id");
+            var user = _context.Users.Find(userId);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
             var selectedObject = _context.ShoppingCarts.Where(sc => (sc.UserId == userId && sc.ProductId == productId)).SingleOrDefault();
             if (selectedObject != null)
             {
@@ -57,11 +84,17 @@ namespace eCommerceStarterCode.Controllers
                 return StatusCode(201, selectedObject);
         }
 
-        [HttpDelete("{id}/{productId}"), Authorize ]
-        public IActionResult Delete(string id, int productId)
+        [HttpDelete("{productId}"), Authorize ]
+        public IActionResult Delete(int productId)
         {
+            var userId = User.FindFirstValue("id");
+            var user = _context.Users.Find(userId);
+            if (user == null)
+            {
+                return NotFound();
+            }
 
-            var item = _context.ShoppingCarts.Where(u => (u.UserId == id && u.ProductId == productId)).SingleOrDefault();
+            var item = _context.ShoppingCarts.Where(u => (u.UserId == userId && u.ProductId == productId)).SingleOrDefault();
             _context.ShoppingCarts.Remove(item);
             _context.SaveChanges();
             return Ok();

@@ -11,14 +11,21 @@ namespace eCommerceStarterCode.Models
         public int ProductId { get; set; }
         public string ProductName { get; set; }
         public string ProductDescription { get; set; }
+
+        [Column(TypeName = "decimal(18,2)")]
         public decimal ProductPrice { get; set; }
         public int QuantityOnHand { get; set; }
+
+        [Column(TypeName = "decimal(18,1)")]
         public decimal ProductAverageRating { get; set; }
         public byte[] ProductImage { get; set; }
-
+        
         //Add a foreign key to the category file
+
         [ForeignKey("Category")]
-        public int CategoryId { get; set; }
+
+        public int CategoryId { get; set;}
+
         public Category Category { get; set; }
     }
 }

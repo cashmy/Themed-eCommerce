@@ -44,8 +44,9 @@ namespace eCommerceStarterCode.Controllers
             }
         }
 
-        // GET api/<OrderDetailController>/product/5
-        [HttpGet("product/{id}"), Authorize]
+        // GET api/<OrderDetailController>/product/5   
+        // temproarily removed Authorize from the [HttpGet(), Authorize]
+        [HttpGet("product/{id}")]
         public IActionResult GetOrderDetailByProduct(int id)
         {
             try
