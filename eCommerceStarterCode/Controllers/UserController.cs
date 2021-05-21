@@ -31,13 +31,20 @@ namespace eCommerceStarterCode.Controllers
             return Ok(users);
         }
 
-        [HttpGet("{id}/get"), Authorize]
-        public IActionResult GetUserById(string id)
+        [HttpGet(), Authorize]
+        public IActionResult GetUserById()
         {
+            var userId = User.FindFirstValue("id");
+            var user = _context.Users.Find(userId);
+            if (user == null)
+            {
+                return NotFound("User not found");
+            }
+
             try
             {
-                var userId = _context.Users.Where(u => u.Id == id).SingleOrDefault();
-                return Ok(userId);
+                var userInfo = _context.Users.Where(u => u.Id == userId).SingleOrDefault();
+                return Ok(userInfo);
             }
             catch
             {
@@ -46,24 +53,36 @@ namespace eCommerceStarterCode.Controllers
             
         }
 
-        [HttpPut("{id}/edit"), Authorize]
-        public IActionResult EditUser(string id, [FromBody]User value)
+        [HttpPut(), Authorize]
+        public IActionResult EditUser([FromBody]User value)
         {
+            var userId = User.FindFirstValue("id");
+            var user = _context.Users.Find(userId);
+            if (user == null)
+            {
+                return NotFound("User not found");
+            }
 
-            var user = _context.Users.Where(u => u.Id == id).SingleOrDefault();
+            var userInfo = _context.Users.Where(u => u.Id == userId).SingleOrDefault();
             _context.Users.Update(value);
             _context.SaveChanges();
             return Ok(user);
         }
 
-        [HttpDelete("{id}/delete"), Authorize]
-        public IActionResult DeleteUser(string id)
+        [HttpDelete(), Authorize]
+        public IActionResult DeleteUser()
         {
-            
+            var userId = User.FindFirstValue("id");
+            var user = _context.Users.Find(userId);
+            if (user == null)
+            {
+                return NotFound("User not found");
+            }
+
             try
             {
-                var user = _context.Users.Where(u => u.Id == id).SingleOrDefault();
-                _context.Remove(user);
+                var userInfo = _context.Users.Where(u => u.Id == userId).SingleOrDefault();
+                _context.Remove(userInfo);
                 _context.SaveChanges();
                 return Ok();
             }

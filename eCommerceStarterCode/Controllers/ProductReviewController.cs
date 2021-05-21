@@ -1,12 +1,10 @@
 ﻿using eCommerceStarterCode.Data;
 using eCommerceStarterCode.Models;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
+using System.Security.Claims;
 
 namespace eCommerceStarterCode.Controllers
 {
@@ -34,27 +32,40 @@ namespace eCommerceStarterCode.Controllers
             return Ok(productReview);
         }
 
-        [HttpGet("{id}/userReviews"), Authorize]
-        public IActionResult UserReviews(string id)
+        [HttpGet("/user"), Authorize]
+        public IActionResult UserReviews()
         {
+            var userId = User.FindFirstValue("id");
+            var user = _context.Users.Find(userId);
+            if (user == null)
+            {
+                return NotFound("User not found");
+            }
+
             try
             {
-                var reviews = _context.ProductReviews.Where(u => u.UserId == id).Select(u => new { u.ReviewText, u.ReviewRating }).ToList();
+                var reviews = _context.ProductReviews.Where(u => u.UserId == userId).Select(u => new { u.ReviewText, u.ReviewRating }).ToList();
                 return Ok(reviews);
 
             }
             catch {
-                return NotFound("User Not Found");
+                return NotFound("No Reviews found");
             }
 
         }
 
-        [HttpPut("{id}/{productId}/review"), Authorize]
-        public IActionResult EditReview(string id, int productId, [FromBody] ProductReview value)
+        [HttpPut("{productId}/review"), Authorize]
+        public IActionResult EditReview(int productId, [FromBody] ProductReview value)
         {
+            var userId = User.FindFirstValue("id");
+            var user = _context.Users.Find(userId);
+            if (user == null)
+            {
+                return NotFound("User not found");
+            }
             try
             {
-                var review = _context.ProductReviews.Where(u => (u.ProductId == productId && u.UserId == id)).SingleOrDefault();
+                var review = _context.ProductReviews.Where(u => (u.ProductId == productId && u.UserId == userId)).SingleOrDefault();
                 _context.ProductReviews.Remove(review);
                 _context.ProductReviews.Add(value);
                 _context.SaveChanges();
@@ -63,7 +74,7 @@ namespace eCommerceStarterCode.Controllers
             }
             catch
             {
-                return NotFound();
+                return NotFound("Review not found");
             }
 
         }
@@ -87,12 +98,19 @@ namespace eCommerceStarterCode.Controllers
             
         }
 
-        [HttpDelete("/{id}/{productId}/deleteReview"), Authorize]
-        public IActionResult DeleteProductReivew(string id, int productId)
+        [HttpDelete("/{productId}"), Authorize]
+        public IActionResult DeleteProductReivew(int productId)
         {
+            var userId = User.FindFirstValue("id");
+            var user = _context.Users.Find(userId);
+            if (user == null)
+            {
+                return NotFound("User not found");
+            }
+
             try
             {
-                var review = _context.ProductReviews.Where(u => (u.UserId == id && u.ProductId == productId)).SingleOrDefault();
+                var review = _context.ProductReviews.Where(u => (u.UserId == userId && u.ProductId == productId)).SingleOrDefault();
                 _context.Remove(review);
                 _context.SaveChanges();
                 return Ok();
