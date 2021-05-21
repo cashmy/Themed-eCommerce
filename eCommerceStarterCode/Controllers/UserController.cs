@@ -92,48 +92,5 @@ namespace eCommerceStarterCode.Controllers
             }
         
         }
-
-
-        [HttpPost("{id}/setRole")]
-        public IActionResult setRoleStatus(string id)
-        {
-            var userId = _context.Users.Where(u => u.Id == id).SingleOrDefault();
-            bool isSupplier = _context.Users.Where(u => u.Id == id).Select(u => u.IsSupplier).SingleOrDefault();
-            var user = _context.Users.Find(userId);
-            if (user == null)
-            {
-                return NotFound();
-            }
-            else
-            {
-                if (!isSupplier)
-                {
-                    UserRole newUserRole = new UserRole()
-                    {
-                        UserId = _context.Users.Where(u => u.Id == id).Select(u => u.Id).SingleOrDefault(),
-                        RoleId = 1
-                    };
-                    _context.UserRoles.Add(newUserRole);
-                    _context.SaveChanges();
-                    return Ok(newUserRole.RoleId);
-
-                }
-                else if (isSupplier)
-                {
-                    UserRole newUserRole = new UserRole()
-                    {
-                        UserId = _context.Users.Where(u => u.Id == id).Select(u => u.Id).SingleOrDefault(),
-                        RoleId = 2
-                    };
-                    _context.UserRoles.Add(newUserRole);
-                    _context.SaveChanges();
-                    return Ok(newUserRole.RoleId);
-
-                }
-
-            }
-            return NotFound("Status not set");
-                
-        }
     }
 }
