@@ -11,8 +11,12 @@ namespace eCommerceStarterCode.Models
         public int ProductId { get; set; }
         public string ProductName { get; set; }
         public string ProductDescription { get; set; }
+
+        [Column(TypeName = "decimal(18,2)")]
         public decimal ProductPrice { get; set; }
         public int QuantityOnHand { get; set; }
+
+        [Column(TypeName = "decimal(18,1)")]
         public decimal ProductAverageRating { get; set; }
         public byte[] ProductImage { get; set; }
         

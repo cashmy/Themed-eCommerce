@@ -22,6 +22,8 @@ namespace eCommerceStarterCode.Models
         public string State { get; set; }
         public string ZipCode { get; set; }
         public string CountryCode { get; set; }
+
+        [Column(TypeName = "decimal(18,2)")]
         public decimal TotalAmt { get; set; }
         public DateTime OrderDate { get; set; }
 

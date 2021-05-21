@@ -8,6 +8,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+
+
 
 
 namespace eCommerceStarterCode.Controllers
@@ -25,7 +28,10 @@ namespace eCommerceStarterCode.Controllers
         [HttpGet("{userId}"), Authorize]
         public IActionResult GetCurrentUserCart(string userId)
         {
-            var userCart = _context.ShoppingCarts.Where(u => u.UserId == userId).Select(u => new { u.ProductId, u.Quantity });
+            var userCart = _context.ShoppingCarts
+                .Include(uc => uc.Product)
+                .Select(uc => new { uc.UserId, uc.ProductId, uc.Product.ProductName, uc.Product.ProductDescription, uc.Quantity, uc.Product.ProductPrice, ExtPrice = uc.Quantity * uc.Product.ProductPrice})
+                .ToList();
             return Ok(userCart);
         }
 

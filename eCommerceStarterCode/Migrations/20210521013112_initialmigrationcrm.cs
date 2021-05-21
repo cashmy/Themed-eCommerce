@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace eCommerceStarterCode.Migrations
 {
-    public partial class m : Migration
+    public partial class initialmigrationcrm : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -243,7 +243,7 @@ namespace eCommerceStarterCode.Migrations
                     ProductDescription = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ProductPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     QuantityOnHand = table.Column<int>(type: "int", nullable: false),
-                    ProductAverageRating = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    ProductAverageRating = table.Column<decimal>(type: "decimal(18,1)", nullable: false),
                     ProductImage = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
                     CategoryId = table.Column<int>(type: "int", nullable: false)
                 },
@@ -375,8 +375,8 @@ namespace eCommerceStarterCode.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "fdd465ce-1fc8-40fc-bd75-7e0bf25e4711", "206387e7-61e3-4fb9-b9be-ba5a332d37a0", "User", "USER" },
-                    { "95a3cc32-2678-4bfd-bf78-40fb89f9bbd3", "690f421c-4775-4b08-8882-b82596bb1641", "Admin", "ADMIN" }
+                    { "59452131-f19c-499d-bc3b-fabcb1dd21cc", "1587808d-2482-4af5-ae53-e1f9c05cce74", "User", "USER" },
+                    { "a95f00cc-6203-40d4-9b60-3a84042be72b", "474555a5-0d50-4cab-8366-d00afcca7e51", "Admin", "ADMIN" }
                 });
 
             migrationBuilder.InsertData(

@@ -10,8 +10,8 @@ using eCommerceStarterCode.Data;
 namespace eCommerceStarterCode.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210521000505_m")]
-    partial class m
+    [Migration("20210521013112_initialmigrationcrm")]
+    partial class initialmigrationcrm
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -50,15 +50,15 @@ namespace eCommerceStarterCode.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "fdd465ce-1fc8-40fc-bd75-7e0bf25e4711",
-                            ConcurrencyStamp = "206387e7-61e3-4fb9-b9be-ba5a332d37a0",
+                            Id = "59452131-f19c-499d-bc3b-fabcb1dd21cc",
+                            ConcurrencyStamp = "1587808d-2482-4af5-ae53-e1f9c05cce74",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
-                            Id = "95a3cc32-2678-4bfd-bf78-40fb89f9bbd3",
-                            ConcurrencyStamp = "690f421c-4775-4b08-8882-b82596bb1641",
+                            Id = "a95f00cc-6203-40d4-9b60-3a84042be72b",
+                            ConcurrencyStamp = "474555a5-0d50-4cab-8366-d00afcca7e51",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
@@ -298,7 +298,7 @@ namespace eCommerceStarterCode.Migrations
                         .HasColumnType("int");
 
                     b.Property<decimal>("ProductAverageRating")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(18,1)");
 
                     b.Property<string>("ProductDescription")
                         .HasColumnType("nvarchar(max)");
