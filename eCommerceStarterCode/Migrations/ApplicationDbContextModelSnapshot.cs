@@ -3,22 +3,15 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using eCommerceStarterCode.Data;
 
 namespace eCommerceStarterCode.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-<<<<<<< HEAD:eCommerceStarterCode/Migrations/20210520184054_migration.Designer.cs
-    [Migration("20210520184054_migration")]
-    partial class migration
-=======
-    [Migration("20210520192854_migrate")]
-    partial class migrate
->>>>>>> 9a88e28fa4bd968e7b3a7cb66d9ae60ee5d9fb1f:eCommerceStarterCode/Migrations/20210520192854_migrate.Designer.cs
+    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -55,25 +48,15 @@ namespace eCommerceStarterCode.Migrations
                     b.HasData(
                         new
                         {
-<<<<<<< HEAD:eCommerceStarterCode/Migrations/20210520184054_migration.Designer.cs
-                            Id = "02104955-70de-4827-8d0d-e8f373da9aef",
-                            ConcurrencyStamp = "ee2e9c50-b26a-42c7-8a60-9bf45d5f50c2",
-=======
-                            Id = "1f2e482b-6ca4-490f-9945-8dfe82fec189",
-                            ConcurrencyStamp = "15ea93f4-5d49-415c-8db1-6d71305ea169",
->>>>>>> 9a88e28fa4bd968e7b3a7cb66d9ae60ee5d9fb1f:eCommerceStarterCode/Migrations/20210520192854_migrate.Designer.cs
+                            Id = "fdd465ce-1fc8-40fc-bd75-7e0bf25e4711",
+                            ConcurrencyStamp = "206387e7-61e3-4fb9-b9be-ba5a332d37a0",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
-<<<<<<< HEAD:eCommerceStarterCode/Migrations/20210520184054_migration.Designer.cs
-                            Id = "0197b9b9-d883-45ca-8d3c-f1640bb7caa9",
-                            ConcurrencyStamp = "622d0689-ffb0-43d5-a6c6-2dc92c619e36",
-=======
-                            Id = "d541f911-604e-4bdc-b726-74d564afc73f",
-                            ConcurrencyStamp = "49ef9a05-64c2-42b2-b564-e413ed515964",
->>>>>>> 9a88e28fa4bd968e7b3a7cb66d9ae60ee5d9fb1f:eCommerceStarterCode/Migrations/20210520192854_migrate.Designer.cs
+                            Id = "95a3cc32-2678-4bfd-bf78-40fb89f9bbd3",
+                            ConcurrencyStamp = "690f421c-4775-4b08-8882-b82596bb1641",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
@@ -342,7 +325,8 @@ namespace eCommerceStarterCode.Migrations
                             ProductId = 1,
                             CategoryId = 1,
                             ProductAverageRating = 4m,
-                            ProductDescription = "Han Solo Action Figure",
+                            ProductDescription = "Great For Kids",
+                            ProductName = " Han Solo Action Figure",
                             ProductPrice = 15m,
                             QuantityOnHand = 5
                         },
@@ -351,7 +335,8 @@ namespace eCommerceStarterCode.Migrations
                             ProductId = 2,
                             CategoryId = 1,
                             ProductAverageRating = 4m,
-                            ProductDescription = "Luke Skywalker Action Figure",
+                            ProductDescription = "Mint Condition",
+                            ProductName = "Luke Skywalker Action Figure",
                             ProductPrice = 15m,
                             QuantityOnHand = 5
                         },
@@ -360,7 +345,8 @@ namespace eCommerceStarterCode.Migrations
                             ProductId = 3,
                             CategoryId = 1,
                             ProductAverageRating = 4m,
-                            ProductDescription = "Darth Vader Action Figure",
+                            ProductDescription = "Still in the original box",
+                            ProductName = "Darth Vader Action Figure",
                             ProductPrice = 15m,
                             QuantityOnHand = 5
                         });
