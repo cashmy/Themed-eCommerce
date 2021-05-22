@@ -23,7 +23,7 @@ namespace eCommerceStarterCode.Controllers
         [HttpGet, Authorize]
         public IActionResult GetCategories()
         {
-            var categories = _context.Categories;
+            var categories = _context.Categories.ToList();
 
             if (categories == null)
             {
