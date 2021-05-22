@@ -10,8 +10,8 @@ using eCommerceStarterCode.Data;
 namespace eCommerceStarterCode.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210520230310_migrateagain")]
-    partial class migrateagain
+    [Migration("20210521214547_m")]
+    partial class m
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -50,15 +50,15 @@ namespace eCommerceStarterCode.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "bb043647-8ba8-4893-85ad-8fc8ff1c3507",
-                            ConcurrencyStamp = "11a40511-9da0-4da7-adc9-d03955734bd2",
+                            Id = "54458c1c-43d0-46cb-9ec4-68164468157c",
+                            ConcurrencyStamp = "ee11d9e4-43d6-4cd0-a859-c068d8efc8fd",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
-                            Id = "d6dd9a77-9c33-42a0-9df0-9b7f3c2ed6f0",
-                            ConcurrencyStamp = "a70966fc-deed-4f4b-bbbe-ad82b13eafed",
+                            Id = "1f9f520f-78c4-4390-8874-97200a7b32d1",
+                            ConcurrencyStamp = "6bdb1871-dbb3-40f2-9bd7-1f8d275983f3",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
@@ -298,7 +298,7 @@ namespace eCommerceStarterCode.Migrations
                         .HasColumnType("int");
 
                     b.Property<decimal>("ProductAverageRating")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(18,1)");
 
                     b.Property<string>("ProductDescription")
                         .HasColumnType("nvarchar(max)");
@@ -327,7 +327,8 @@ namespace eCommerceStarterCode.Migrations
                             ProductId = 1,
                             CategoryId = 1,
                             ProductAverageRating = 4m,
-                            ProductDescription = "Han Solo Action Figure",
+                            ProductDescription = "Great For Kids",
+                            ProductName = " Han Solo Action Figure",
                             ProductPrice = 15m,
                             QuantityOnHand = 5
                         },
@@ -336,7 +337,8 @@ namespace eCommerceStarterCode.Migrations
                             ProductId = 2,
                             CategoryId = 1,
                             ProductAverageRating = 4m,
-                            ProductDescription = "Luke Skywalker Action Figure",
+                            ProductDescription = "Mint Condition",
+                            ProductName = "Luke Skywalker Action Figure",
                             ProductPrice = 15m,
                             QuantityOnHand = 5
                         },
@@ -345,7 +347,8 @@ namespace eCommerceStarterCode.Migrations
                             ProductId = 3,
                             CategoryId = 1,
                             ProductAverageRating = 4m,
-                            ProductDescription = "Darth Vader Action Figure",
+                            ProductDescription = "Still in the original box",
+                            ProductName = "Darth Vader Action Figure",
                             ProductPrice = 15m,
                             QuantityOnHand = 5
                         });
