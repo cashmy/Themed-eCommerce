@@ -48,15 +48,15 @@ namespace eCommerceStarterCode.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "5bc8d3c3-e2a8-42b0-88e3-df184d134439",
-                            ConcurrencyStamp = "0e4b2b86-aa6c-4966-b74a-d03aec0662c2",
+                            Id = "bc452265-098c-41ee-9fdb-bd18b0fb992f",
+                            ConcurrencyStamp = "d6ea5485-a217-4fcb-a731-82c636979365",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
-                            Id = "673b519e-ec25-4873-94af-d938de07fb88",
-                            ConcurrencyStamp = "6b37cc22-6a87-4582-b425-4f349d4b72fc",
+                            Id = "8a3e9bb2-103e-4f79-a5f3-f45c20d734de",
+                            ConcurrencyStamp = "20143c45-8470-448e-a13f-f3ee3bc58017",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
