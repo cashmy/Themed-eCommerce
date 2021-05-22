@@ -23,13 +23,29 @@ namespace eCommerceStarterCode.Controllers
         [HttpGet, Authorize]
         public IActionResult GetCategories()
         {
-            var categories = _context.Categories;
+            var categories = _context.Categories.ToList();
 
             if (categories == null)
             {
                 return NotFound();
             }
             return Ok(categories);
+        }
+
+        [HttpGet("{id}"), Authorize]
+
+        public IActionResult GetCategoryById(int id)
+        {
+            try
+            {
+                var selectedObject = _context.Categories.Where(u => u.CategoryId == id).SingleOrDefault();
+ 
+                return Ok(selectedObject);
+            }
+            catch
+            {
+                return NotFound("no object");
+            }
         }
 
         [HttpPost]

@@ -24,7 +24,7 @@ namespace eCommerceStarterCode.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            var product = _context.Products;
+            var product = _context.Products.ToList();
             return Ok(product);
         }
 
