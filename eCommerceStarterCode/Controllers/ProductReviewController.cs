@@ -94,7 +94,7 @@ namespace eCommerceStarterCode.Controllers
                     ProductReview newReview = new ProductReview(){ 
                         UserId = id,
                         ProductId = productId,
-                        ReviewRating = Convert.ToInt32(value.ReviewRating),
+                        ReviewRating = System.Convert.ToInt32(value.ReviewRating),
                         ReviewText = null,
 
                     };
@@ -107,7 +107,7 @@ namespace eCommerceStarterCode.Controllers
                     ProductReview updateReview = new ProductReview() { 
                         UserId = id,
                         ProductId = productId,
-                        ReviewRating = Convert.ToInt32(value.ReviewRating),
+                        ReviewRating = System.Convert.ToInt32(value.ReviewRating),
                         ReviewText = reviewText
                     };
                     _context.ProductReviews.Remove(review);
@@ -157,7 +157,7 @@ namespace eCommerceStarterCode.Controllers
                     {
                         UserId = id,
                         ProductId = productId,
-                        ReviewRating = Convert.ToInt32(reviewRating),
+                        ReviewRating = System.Convert.ToInt32(reviewRating),
                         ReviewText = value.ReviewText
                     };
                     _context.ProductReviews.Remove(review);
