@@ -32,6 +32,22 @@ namespace eCommerceStarterCode.Controllers
             return Ok(categories);
         }
 
+        [HttpGet("{id}"), Authorize]
+
+        public IActionResult GetCategoryById(int id)
+        {
+            try
+            {
+                var selectedObject = _context.Categories.Where(u => u.CategoryId == id).SingleOrDefault();
+ 
+                return Ok(selectedObject);
+            }
+            catch
+            {
+                return NotFound("no object");
+            }
+        }
+
         [HttpPost]
         public IActionResult Post([FromBody] Category value)
         {

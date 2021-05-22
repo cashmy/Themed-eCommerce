@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace eCommerceStarterCode.Migrations
 {
-    public partial class initialmigrationcrm : Migration
+    public partial class m : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -315,8 +315,8 @@ namespace eCommerceStarterCode.Migrations
                 name: "ShoppingCarts",
                 columns: table => new
                 {
-                    ProductId = table.Column<int>(type: "int", nullable: false),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    ProductId = table.Column<int>(type: "int", nullable: false),
                     Quantity = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -375,8 +375,8 @@ namespace eCommerceStarterCode.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "59452131-f19c-499d-bc3b-fabcb1dd21cc", "1587808d-2482-4af5-ae53-e1f9c05cce74", "User", "USER" },
-                    { "a95f00cc-6203-40d4-9b60-3a84042be72b", "474555a5-0d50-4cab-8366-d00afcca7e51", "Admin", "ADMIN" }
+                    { "7f4aedd5-92fe-43e5-b2f5-dd50a031f804", "b65926b5-7112-4b9d-ba76-1d59a6cc00c5", "User", "USER" },
+                    { "689fa730-2abf-4ee9-95ba-97acd3c79b67", "7b6e1088-1a0f-47b8-8332-fe2a977a0bd0", "Admin", "ADMIN" }
                 });
 
             migrationBuilder.InsertData(
