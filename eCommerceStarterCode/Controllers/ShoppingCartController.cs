@@ -70,8 +70,8 @@ namespace eCommerceStarterCode.Controllers
 
             var item = _context.ShoppingCarts.Where(u => (u.UserId == userId && u.ProductId == productId)).SingleOrDefault();
             _context.ShoppingCarts.Remove(item);
-            _context.SaveChanges();
             _context.ShoppingCarts.Add(value);
+            _context.SaveChanges();
             return Ok(value);
 
         }
