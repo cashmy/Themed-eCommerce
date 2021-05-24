@@ -42,12 +42,13 @@ namespace eCommerceStarterCode.Data
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Category>()
                 .HasData(
-                    new Category { CategoryId = 1, CategoryDescription = "Action Figure" });
+                    new Category { CategoryId = 1, CategoryDescription = "Action Figure" },
+                    new Category { CategoryId = 2, CategoryDescription = "Video Game" }
+                    );
             modelBuilder.Entity<Product>()
                 .HasData(
                     new Product { ProductId = 1, ProductName = " Han Solo Action Figure", ProductDescription = "Great For Kids", ProductPrice = 15, QuantityOnHand = 5, ProductAverageRating = 4, CategoryId = 1 },
-                    new Product { ProductId = 2, ProductName = "Luke Skywalker Action Figure", ProductDescription = "Mint Condition", ProductPrice = 15, QuantityOnHand = 5, ProductAverageRating = 4, CategoryId = 1 },
-                    new Product { ProductId = 3, ProductName = "Darth Vader Action Figure", ProductDescription = "Still in the original box", ProductPrice = 15, QuantityOnHand = 5, ProductAverageRating = 4, CategoryId = 1 }
+                    new Product { ProductId = 2, ProductName = "Star Wars Jedi Arena", ProductDescription = "Still in the original box", ProductPrice = 30, QuantityOnHand = 5, ProductAverageRating = 2, CategoryId = 2 }
                     );
             modelBuilder.ApplyConfiguration(new RolesConfiguration());
             modelBuilder.Entity<SupplierProduct>().HasKey(sp => new { sp.UserId, sp.ProductId });
