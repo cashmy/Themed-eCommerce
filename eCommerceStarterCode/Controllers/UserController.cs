@@ -69,19 +69,13 @@ namespace eCommerceStarterCode.Controllers
             return Ok(user);
         }
 
-        [HttpDelete(), Authorize]
-        public IActionResult DeleteUser()
+        [HttpDelete("{userId}"), Authorize]
+        public IActionResult DeleteUser(string userId)
         {
-            var userId = User.FindFirstValue("id");
-            var user = _context.Users.Find(userId);
-            if (user == null)
-            {
-                return NotFound("User not found");
-            }
 
             try
             {
-                var userInfo = _context.Users.Where(u => u.Id == userId).SingleOrDefault();
+                var userInfo = _context.Users.Where(u => u.UserName == userId).SingleOrDefault();
                 _context.Remove(userInfo);
                 _context.SaveChanges();
                 return Ok();
