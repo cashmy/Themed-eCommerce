@@ -31,7 +31,7 @@ namespace eCommerceStarterCode.Controllers
                 return NotFound("User not found");
             }
 
-            var userCart = _context.ShoppingCarts
+            var userCart = _context.ShoppingCarts.Where(uc => uc.UserId == userId)
                 .Include(uc => uc.Product)
                 .Select(uc => new { uc.UserId, uc.ProductId, uc.Product.ProductName, uc.Product.ProductDescription, uc.Quantity, uc.Product.ProductPrice, ExtPrice = uc.Quantity * uc.Product.ProductPrice})
                 .ToList();
